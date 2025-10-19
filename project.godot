@@ -83,6 +83,7 @@ folder_colors={
 "res://Resources/SpriteFrames/Player/Mario/": "red",
 "res://Resources/SpriteFrames/Player/Toad/": "blue",
 "res://Resources/SpriteFrames/Player/Toadette/": "pink",
+"res://Scenes/Levels/InfiniMario/": "purple",
 "res://Scenes/Levels/SMB1/": "red",
 "res://Scenes/Levels/SMB1/World1/1-4.tscn": "orange",
 "res://Scenes/Levels/SMBANN/": "pink",
