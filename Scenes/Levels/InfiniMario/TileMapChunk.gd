@@ -3,11 +3,16 @@ extends TileMapLayer
 class_name TileMapChunk
 
 var chunk_pattern: TileMapPattern
+
 var size_in_chunks: Vector2i:
 	get:
-		var uc = get_used_cells()
-		var size = uc.max() - uc.min()
 		return size / LevelChunk.TILEMAP_SIZE
+
+var size: Vector2i:
+	get:
+		if chunk_pattern:
+			return chunk_pattern.get_size()
+		return Vector2i.ZERO
 
 
 func _ready() -> void:
@@ -16,6 +21,7 @@ func _ready() -> void:
 	navigation_enabled = false
 	if !Engine.is_editor_hint():
 		visible = false
+
 
 func generate_level_chunk() -> LevelChunk:
 	var lc: LevelChunk = LevelChunk.new(chunk_pattern)

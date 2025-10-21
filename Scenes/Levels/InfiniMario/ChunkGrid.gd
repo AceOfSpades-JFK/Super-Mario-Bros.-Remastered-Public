@@ -2,12 +2,12 @@
 extends Node
 class_name ChunkGrid
 
+const GRID_OFFSET: Vector2i = Vector2i(-8, -12)	# Compensation
 const GRID_SIZE: Vector2i = Vector2i(4, 1)
 const MAX_TILEMAP_SIZE: Vector2i = LevelChunk.TILEMAP_SIZE * GRID_SIZE
 const MAX_WORLD_SIZE: Vector2i = MAX_TILEMAP_SIZE * LevelChunk.TILE_SIZE
 
 @export var foreground: TileMapLayer
-@export var _tilemap_chunks: Array[TileMapChunk] = []
 @export var view_anchor: ChunkGridViewAnchor
 @export var tilemap_offset: Vector2i = Vector2i.ZERO:
 	set(v):
@@ -39,7 +39,7 @@ func _ready() -> void:
 		view_anchor.looped_vertical.connect(_on_looped_vertical)
 		
 		# Generate level chunks
-		for c: TileMapChunk in _tilemap_chunks:
+		for c: TileMapChunk in get_children():
 			_level_chunks.append(c.generate_level_chunk())
 		
 		# Randomize grid
@@ -71,8 +71,8 @@ func _get_level_chunk(i: int) -> LevelChunk:
 
 
 func _set_grid_cell_pattern(gridpos: Vector2i, pattern: TileMapPattern) -> void:	
-	var p = gridpos * LevelChunk.TILEMAP_SIZE
-	foreground.set_pattern(p, pattern)
+	var tilepos = gridpos * LevelChunk.TILEMAP_SIZE
+	foreground.set_pattern(tilepos + GRID_OFFSET, pattern)
 	pass
 
 func _on_looped_horizontal() -> void:
@@ -83,10 +83,11 @@ func _on_looped_vertical() -> void:
 
 
 func _world_to_grid(worldpos: Vector2) -> Vector2i:
-	return Vector2i(worldpos) / LevelChunk.WORLD_SIZE
+	var v = Vector2i(worldpos) / LevelChunk.WORLD_SIZE
+	return Vector2i(posmod(v.x, GRID_SIZE.x), posmod(v.y, GRID_SIZE.y))
 
 func _grid_to_index(gridpos: Vector2i) -> int:
 	return gridpos.y * GRID_SIZE.x + gridpos.x
 
 func _index_to_grid(index: int) -> Vector2i:
-	return Vector2i(index % GRID_SIZE.x, index / GRID_SIZE.x)
+	return Vector2i(index % GRID_SIZE.x, index / GRID_SIZE.x) * Vector2i(1, -1)

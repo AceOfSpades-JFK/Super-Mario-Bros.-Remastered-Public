@@ -18,8 +18,9 @@ var position: Vector2:
 
 func _physics_process(_delta: float) -> void:
 	# Modulo'd vectors
-	var modx: float = fposmod(position.x, ChunkGrid.MAX_WORLD_SIZE.x)
-	var mody: float = fposmod(position.y, ChunkGrid.MAX_WORLD_SIZE.y)
+	var offset: Vector2 = ChunkGrid.GRID_OFFSET * LevelChunk.TILE_SIZE
+	var modx: float = fposmod(position.x - offset.x, ChunkGrid.MAX_WORLD_SIZE.x)
+	var mody: float = fposmod(position.y - offset.y, ChunkGrid.MAX_WORLD_SIZE.y)
 	var modp: Vector2i = Vector2i(modx, mody)
 	var gridpos = Vector2i(modp) / LevelChunk.WORLD_SIZE
 	var prev_gridpos = Vector2i(_prev_position) / LevelChunk.WORLD_SIZE
@@ -30,8 +31,8 @@ func _physics_process(_delta: float) -> void:
 	_prev_position = position
 		
 	# Do a modulo thing with the position
-	if position.x != modx:
+	if (position + offset).x != modx:
 		looped_horizontal.emit()
-	if position.y != mody:
+	if (position + offset).y != mody:
 		looped_vertical.emit()
-	_parent.position = Vector2(modx, mody)
+	_parent.position = Vector2(modx, mody) + offset

@@ -5,7 +5,6 @@
 
 [node name="LevelChunk" type="Node"]
 script = ExtResource("1_f2sw8")
-_foreground = NodePath("Tiles")
 
 [node name="Tiles" parent="." instance=ExtResource("4_m1brp")]
 visible = false
