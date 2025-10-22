@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=4 uid="uid://bupux6rvyg651"]
+[gd_scene load_steps=56 format=4 uid="uid://bupux6rvyg651"]
 
 [ext_resource type="Script" uid="uid://bcqr1v25ygedb" path="res://Scripts/Classes/LevelClass.gd" id="1_rbqoo"]
+[ext_resource type="PackedScene" uid="uid://bksxgpygrdjl7" path="res://Scenes/Prefabs/LevelBG.tscn" id="2_jgep1"]
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="4_ne5xm"]
 [ext_resource type="PackedScene" uid="uid://cqvr7a6e84oti" path="res://Scenes/Prefabs/Blocks/BrickBlocks/CoinBrickBlock.tscn" id="7_g2aeb"]
 [ext_resource type="PackedScene" uid="uid://bc1mrna4kybhv" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/QuestionBlock.tscn" id="8_fj23m"]
@@ -1730,11 +1731,10 @@ script = ExtResource("1_rbqoo")
 time_limit = 10000000
 world_id = 0
 level_id = 0
-vertical_height = -5353
-can_backscroll = true
+
+[node name="LevelBG" parent="." instance=ExtResource("2_jgep1")]
 
 [node name="Tiles" parent="." instance=ExtResource("4_ne5xm")]
-tile_map_data = PackedByteArray("AAAAAAwAAAAEAAIAAAAAAA0AAAAEAAIAAAAAAA4AAAAEAAIAAAABAAwAAAAEAAIAAAABAA0AAAAEAAIAAAABAA4AAAAEAAIAAAACAAwAAAAEAAIAAAACAA0AAAAEAAIAAAACAA4AAAAEAAIAAAADAAwAAAAEAAIAAAADAA0AAAAEAAIAAAADAA4AAAAEAAIAAAAEAAwAAAAEAAIAAAAEAA0AAAAEAAIAAAAEAA4AAAAEAAIAAAAFAAwAAAAEAAIAAAAFAA0AAAAEAAIAAAAFAA4AAAAEAAIAAAAGAAwAAAAEAAIAAAAGAA0AAAAEAAIAAAAGAA4AAAAEAAIAAAAHAAwAAAAEAAIAAAAHAA0AAAAEAAIAAAAHAA4AAAAEAAIAAAAIAAwAAAAEAAIAAAAIAA0AAAAEAAIAAAAIAA4AAAAEAAIAAAAJAAwAAAAEAAIAAAAJAA0AAAAEAAIAAAAJAA4AAAAEAAIAAAAKAAwAAAAEAAIAAAAKAA0AAAAEAAIAAAAKAA4AAAAEAAIAAAALAAwAAAAEAAIAAAALAA0AAAAEAAIAAAALAA4AAAAEAAIAAAAMAAwAAAAEAAIAAAAMAA0AAAAEAAIAAAAMAA4AAAAEAAIAAAANAAwAAAAEAAIAAAANAA0AAAAEAAIAAAANAA4AAAAEAAIAAAAOAAwAAAAEAAIAAAAOAA0AAAAEAAIAAAAOAA4AAAAEAAIAAAAPAAwAAAAEAAIAAAAPAA0AAAAEAAIAAAAPAA4AAAAEAAIAAAD6//7/AAAIAAYAAAD6////AAAIAAcAAAD7//7/AAAJAAYAAAD7////AAAJAAcAAAA6AP7/AAAIAAYAAAA6AP//AAAIAAcAAAA7AP7/AAAJAAYAAAA7AP//AAAJAAcAAAA=")
 
 [node name="ChunkGrid" type="Node" parent="." node_paths=PackedStringArray("foreground", "view_anchor")]
 script = ExtResource("11_0ftwy")

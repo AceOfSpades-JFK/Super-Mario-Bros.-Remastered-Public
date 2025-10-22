@@ -19,20 +19,31 @@ var position: Vector2:
 func _physics_process(_delta: float) -> void:
 	# Modulo'd vectors
 	var offset: Vector2 = ChunkGrid.GRID_OFFSET * LevelChunk.TILE_SIZE
-	var modx: float = fposmod(position.x - offset.x, ChunkGrid.MAX_WORLD_SIZE.x)
-	var mody: float = fposmod(position.y - offset.y, ChunkGrid.MAX_WORLD_SIZE.y)
+	var size = ChunkGrid.MAX_WORLD_SIZE
+	var modx: float = fposmod(position.x - offset.x, size.x)
+	var mody: float = fposmod(position.y - offset.y, size.y)
 	var modp: Vector2i = Vector2i(modx, mody)
 	var gridpos = Vector2i(modp) / LevelChunk.WORLD_SIZE
-	var prev_gridpos = Vector2i(_prev_position) / LevelChunk.WORLD_SIZE
+	var prev_gridpos = Vector2i(_prev_position-offset) / LevelChunk.WORLD_SIZE
+	prev_gridpos.x = posmod(prev_gridpos.x, ChunkGrid.GRID_SIZE.x)
+	prev_gridpos.y = posmod(prev_gridpos.y, ChunkGrid.GRID_SIZE.y)
 	
 	# Check if the anchor has crossed chunks
-	if gridpos != prev_gridpos:
-		crossed_chunks.emit(gridpos)
+	if gridpos != prev_gridpos && Vector2i(position-offset) == modp:
+		# Use current position and _prev_positions. This is before the current pos gets modulo'd
+		var direction = gridpos - prev_gridpos
+		print("%s - %s = %s" % [gridpos, prev_gridpos, direction])
+		crossed_chunks.emit(gridpos, direction)
 	_prev_position = position
 		
 	# Do a modulo thing with the position
-	if (position + offset).x != modx:
-		looped_horizontal.emit()
-	if (position + offset).y != mody:
-		looped_vertical.emit()
-	_parent.position = Vector2(modx, mody) + offset
+	if Vector2i(position-offset) != modp:
+		if position.x != modx:
+			looped_horizontal.emit()
+		if position.y != mody:
+			looped_vertical.emit()
+			
+		if _parent is Player:
+			_parent.teleport_player(Vector2(modx, mody) + offset, false)
+		else:
+			_parent.position = Vector2(modx, mody) + offset

@@ -23,3 +23,6 @@ var size_in_chunks: Vector2i:
 
 func _init(p: TileMapPattern) -> void:
 	pattern = p
+
+func get_used_cells() -> Array[Vector2i]:
+	return pattern.get_used_cells()

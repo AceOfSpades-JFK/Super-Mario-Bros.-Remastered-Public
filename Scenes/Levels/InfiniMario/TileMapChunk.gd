@@ -30,3 +30,9 @@ func generate_level_chunk() -> LevelChunk:
 
 func get_full_pattern() -> TileMapPattern:
 	return get_pattern(get_used_cells())
+
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if not get_parent() is ChunkGrid:
+		return ["TileMapChunk must be a child of a ChunkGrid!"]
+	return []
