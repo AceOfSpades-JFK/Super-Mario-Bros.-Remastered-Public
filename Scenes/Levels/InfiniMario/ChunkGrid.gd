@@ -78,52 +78,23 @@ func _set_grid_chunk(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gridp
 	var index = _grid_to_index(gridpos)
 	var old_id = _grid[index]
 	var old_chunk = _level_chunks[old_id]
-	_clear_pattern(tilepos + GRID_OFFSET, old_chunk.get_used_cells())
+	_clear_pattern(tilepos + GRID_OFFSET, old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET + Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET - Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET + Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET - Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET + MAX_TILEMAP_SIZE, old_chunk.pattern)
+	_clear_pattern(tilepos + GRID_OFFSET - MAX_TILEMAP_SIZE, old_chunk.pattern)
+	
 	_grid[index] = new_id
 	var new_chunk = _get_level_chunk(index)
 	_set_pattern(tilepos + GRID_OFFSET, new_chunk.pattern)
-	
-	# Edge case... literally!
-	var opposite_gridpos = Vector2i.ZERO
-	var edgedir = Vector2i.ZERO
-	var on_edge = false
-	if GRID_SIZE.x > 1:
-		if gridpos.x == 0: # Loop left to right
-			opposite_gridpos.x = GRID_SIZE.x-1
-			edgedir.x = -1
-			on_edge = true
-		elif gridpos.x == GRID_SIZE.x-1: # Loop right to left
-			opposite_gridpos.x = 0
-			edgedir.x = 1
-			on_edge = true
-	
-	if GRID_SIZE.y > 1:
-		if gridpos.y == 0: # Loop top to bottom
-			opposite_gridpos.y = GRID_SIZE.y-1
-			edgedir.x = -1
-			on_edge = true
-		elif gridpos.y == GRID_SIZE.y-1: # Loop bottom to top
-			opposite_gridpos.y = 0
-			edgedir.x = 1
-			on_edge = true
-	
-	if on_edge:
-		var edgepos = (gridpos + edgedir) * LevelChunk.TILEMAP_SIZE
-		var opposite_edgepos = (opposite_gridpos - edgedir) * LevelChunk.TILEMAP_SIZE
-		var opposite_edge_chunk = _get_level_chunk(_grid_to_index(opposite_gridpos))
-		var current_edge_chunk = new_chunk
-		
-		# Screw it, do it the long way
-		# TODO: Optimize!
-		for x in range(LevelChunk.TILEMAP_SIZE.x):
-			for y in range(LevelChunk.TILEMAP_SIZE.y):
-				foreground.erase_cell(edgepos + GRID_OFFSET + Vector2i(x,y))
-		for x in range(LevelChunk.TILEMAP_SIZE.x):
-			for y in range(LevelChunk.TILEMAP_SIZE.y):
-				foreground.erase_cell(opposite_edgepos + GRID_OFFSET + Vector2i(x,y))
-		#_clear_pattern(edgepos + GRID_OFFSET, opposite_edge.get_used_cells())
-		_set_pattern(edgepos + GRID_OFFSET, opposite_edge_chunk.pattern)
-		_set_pattern(opposite_edgepos + GRID_OFFSET, current_edge_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET + Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET - Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET + Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET - Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET + MAX_TILEMAP_SIZE, new_chunk.pattern)
+	_set_pattern(tilepos + GRID_OFFSET - MAX_TILEMAP_SIZE, new_chunk.pattern)
 
 func _set_pattern(tile_offset: Vector2i, pattern: TileMapPattern):
 	foreground.set_pattern(tile_offset,  pattern)
@@ -137,8 +108,8 @@ func _clear_grid_chunk(gridpos: Vector2i) -> void:
 	for c: Vector2i in chunk.pattern.get_used_cells():
 		foreground.erase_cell(c + tilepos)
 
-func _clear_pattern(tile_offset: Vector2i, used_cells: Array[Vector2i]) -> void:
-	for c: Vector2i in used_cells:
+func _clear_pattern(tile_offset: Vector2i, pattern: TileMapPattern) -> void:
+	for c: Vector2i in pattern.get_used_cells():
 		foreground.set_cell(c + tile_offset, -1, Vector2i(-1, -1))
 
 
