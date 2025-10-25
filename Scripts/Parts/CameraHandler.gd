@@ -172,7 +172,8 @@ func handle_offsets(delta: float) -> void:
 
 func do_limits() -> void:
 	camera_right_limit = clamp(Player.camera_right_limit, -256 + (get_viewport().get_visible_rect().size.x), INF)
-	camera_position.x = clamp(camera_position.x, point_to_camera_limit(-256 - camera_offset.x, -1), point_to_camera_limit(camera_right_limit - camera_offset.x, 1))
+	#camera_position.x = clamp(camera_position.x, point_to_camera_limit(-256 - camera_offset.x, -1), point_to_camera_limit(camera_right_limit - camera_offset.x, 1))
+	# In WorldInfinity, the leftmost limit needs to be disabled after going a screen to the right
 	camera_position.y = clamp(camera_position.y, point_to_camera_limit_y(Global.current_level.vertical_height, -1), point_to_camera_limit_y(32, 1))
 	var wall_enabled := true
 	if is_instance_valid(Global.level_editor):
