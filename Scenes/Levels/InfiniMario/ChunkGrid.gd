@@ -3,7 +3,7 @@ extends Node
 class_name ChunkGrid
 
 const GRID_OFFSET: Vector2i = Vector2i(-8, -12)	# Compensation for SMBR stuff
-const GRID_SIZE: Vector2i = Vector2i(16, 1)
+const GRID_SIZE: Vector2i = Vector2i(8, 1)
 const MAX_TILEMAP_SIZE: Vector2i = LevelChunk.TILEMAP_SIZE * GRID_SIZE
 const MAX_WORLD_SIZE: Vector2i = MAX_TILEMAP_SIZE * LevelChunk.TILE_SIZE
 
@@ -56,21 +56,20 @@ func get_chunk_at_index(index: int) -> LevelChunk:
 	return _level_chunks[_grid[index]]
 
 
-# TODO: Implement this good
 func _on_crossed_chunks(gridpos: Vector2i, direction: Vector2i) -> void:
-	#var i = _grid[_grid_to_index(new_grid)]
-	#var pattern = _level_chunks[i].get_foreground_pattern()
-	#foreground.set_pattern(tilemap_offset + (new_grid + Vector2i.LEFT)  * LevelChunk.TILEMAP_SIZE, pattern)
-	#foreground.set_pattern(tilemap_offset + (new_grid + Vector2i.RIGHT) * LevelChunk.TILEMAP_SIZE, pattern)
-	var dest = (gridpos + direction)
+	# Handle aspect ratio
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var aspect: float = viewport_size.x / viewport_size.y
+	var draw_dist: int = min(ceili(aspect), GRID_SIZE.x-1)
+	
+	var dest = (gridpos + (direction*draw_dist))
 	var modx = posmod(dest.x, GRID_SIZE.x)
 	var mody = posmod(dest.y, GRID_SIZE.y)
-	var modout = Vector2i(modx, mody)
+	var modp = Vector2i(modx, mody)
 	var rand_id = randi_range(0, _level_chunks.size()-1)
 	while rand_id == _grid[_grid_to_index(gridpos)]:
 		rand_id = randi_range(0, _level_chunks.size()-1)
-	_set_grid_chunk(modout, randi_range(0, _level_chunks.size()-1))
-	pass
+	_set_grid_chunk(modp, randi_range(0, _level_chunks.size()-1))
 
 
 func _set_grid_chunk(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gridpos)]) -> void:	
