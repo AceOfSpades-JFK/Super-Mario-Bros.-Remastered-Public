@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhkadjns0yy5b"]
+
+[ext_resource type="Texture2D" uid="uid://dyy228i4nwt2" path="res://icon32.png" id="1_j7eye"]
+[ext_resource type="PackedScene" uid="uid://bi1hb03wk001p" path="res://Scenes/Prefabs/Entities/Enemies/Muncher.tscn" id="2_cebl8"]
+[ext_resource type="Script" uid="uid://ceh28krjthgae" path="res://Scenes/Levels/InfiniMario/SpriteMirroringHandler.gd" id="2_h8b3n"]
+[ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="4_nywc7"]
+
+[node name="SpriteMirroringTest" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Test"]]
+visible = false
+position = Vector2(64, 64)
+texture = ExtResource("1_j7eye")
+
+[node name="Muncher" parent="." groups=["Test"] instance=ExtResource("2_cebl8")]
+position = Vector2(72, 56)
+
+[node name="SpriteMirrorHandler" type="Node" parent="."]
+script = ExtResource("2_h8b3n")
+node_groups = Array[StringName]([&"Test"])
+
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = 80.0
+offset_right = 152.0
+offset_bottom = 120.0
+text = "^
+I'M THE 
+REAL SPRITE!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 224.0
+offset_right = 240.0
+offset_bottom = 264.0
+text = "LOOK AT ALL THESE FAKE ASSES"
+horizontal_alignment = 1
+
+[node name="Tiles" parent="." instance=ExtResource("4_nywc7")]
+tile_map_data = PackedByteArray(0, 0, 4, 0, 4, 0, 0, 0, 4, 0, 2, 0, 0, 0)
