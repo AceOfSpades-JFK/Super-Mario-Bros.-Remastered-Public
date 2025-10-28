@@ -1,19 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhkadjns0yy5b"]
+[gd_scene load_steps=7 format=4 uid="uid://bhkadjns0yy5b"]
 
 [ext_resource type="Texture2D" uid="uid://dyy228i4nwt2" path="res://icon32.png" id="1_j7eye"]
+[ext_resource type="Script" uid="uid://bcqr1v25ygedb" path="res://Scripts/Classes/LevelClass.gd" id="1_rfidv"]
 [ext_resource type="PackedScene" uid="uid://bi1hb03wk001p" path="res://Scenes/Prefabs/Entities/Enemies/Muncher.tscn" id="2_cebl8"]
 [ext_resource type="Script" uid="uid://ceh28krjthgae" path="res://Scenes/Levels/InfiniMario/SpriteMirroringHandler.gd" id="2_h8b3n"]
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="4_nywc7"]
+[ext_resource type="PackedScene" uid="uid://cuh62hlq8errh" path="res://Scenes/Prefabs/Entities/Player.tscn" id="5_a3oxk"]
 
-[node name="SpriteMirroringTest" type="Node2D"]
+[node name="SpriteMirroringTest" type="Node"]
+script = ExtResource("1_rfidv")
+can_backscroll = true
+metadata/_custom_type_script = "uid://bcqr1v25ygedb"
+
+[node name="Muncher" parent="." groups=["Test"] instance=ExtResource("2_cebl8")]
+position = Vector2(72, -32)
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Test"]]
 visible = false
 position = Vector2(64, 64)
 texture = ExtResource("1_j7eye")
-
-[node name="Muncher" parent="." groups=["Test"] instance=ExtResource("2_cebl8")]
-position = Vector2(72, 56)
 
 [node name="SpriteMirrorHandler" type="Node" parent="."]
 script = ExtResource("2_h8b3n")
@@ -38,4 +43,7 @@ text = "LOOK AT ALL THESE FAKE ASSES"
 horizontal_alignment = 1
 
 [node name="Tiles" parent="." instance=ExtResource("4_nywc7")]
-tile_map_data = PackedByteArray(0, 0, 4, 0, 4, 0, 0, 0, 4, 0, 2, 0, 0, 0)
+tile_map_data = PackedByteArray("AAD4/wAAAAAEAAIAAAD5/wAAAAAEAAIAAAD6/wAAAAAEAAIAAAD7/wAAAAAEAAIAAAD8/wAAAAAEAAIAAAD9/wAAAAAEAAIAAAD+/wAAAAAEAAIAAAD//wAAAAAEAAIAAAAAAAAAAAAEAAIAAAABAAAAAAAEAAIAAAACAAAAAAAEAAIAAAADAAAAAAAEAAIAAAAEAAAAAAAEAAIAAAAFAAAAAAAEAAIAAAAGAAAAAAAEAAIAAAAHAAAAAAAEAAIAAAAIAAAAAAAEAAIAAAAJAAAAAAAEAAIAAADv/wAAAAAEAAIAAADw/wAAAAAEAAIAAADx/wAAAAAEAAIAAADy/wAAAAAEAAIAAADz/wAAAAAEAAIAAAD0/wAAAAAEAAIAAAD1/wAAAAAEAAIAAAD2/wAAAAAEAAIAAAD3/wAAAAAEAAIAAAAKAAAAAAAEAAIAAAALAAAAAAAEAAIAAAAMAAAAAAAEAAIAAAANAAAAAAAEAAIAAAAOAAAAAAAEAAIAAAAPAAAAAAAEAAIAAAAQAAAAAAAEAAIAAAARAAAAAAAEAAIAAAASAAAAAAAEAAIAAAATAAAAAAAEAAIAAAAUAAAAAAAEAAIAAAAVAAAAAAAEAAIAAAAWAAAAAAAEAAIAAAAXAAAAAAAEAAIAAAAYAAAAAAAEAAIAAAAZAAAAAAAEAAIAAAA=")
+
+[node name="Player" parent="." groups=["Test"] instance=ExtResource("5_a3oxk")]
+position = Vector2(-64, -32)
