@@ -1,9 +1,9 @@
 extends Node
 class_name SpriteMirroringHandler
 
-const BORDER_ORIGIN = Vector2(0,0)
-const BORDER_SIZE = Vector2(128, 128)
-const BORDER_RECT = Rect2(BORDER_ORIGIN - BORDER_SIZE / 2, BORDER_SIZE)
+const BORDER_ORIGIN = ChunkGrid.GRID_OFFSET
+const BORDER_SIZE = ChunkGrid.MAX_WORLD_SIZE
+const BORDER_RECT = Rect2(BORDER_ORIGIN, BORDER_SIZE)
 
 @export var node_groups: Array[StringName] = []
 
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 	
 	for spr: Node2D in _sprite_collection:
 		var cv_item: RID = spr.get_canvas_item()
-		if spr.global_position.x < BORDER_ORIGIN.x:
+		if spr.global_position.x < BORDER_ORIGIN.x + BORDER_SIZE.x / 2:
 			RenderingServer.canvas_set_item_repeat(cv_item, Vector2(BORDER_SIZE.x, 0), 1)
 		else:
 			RenderingServer.canvas_set_item_repeat(cv_item, Vector2(-BORDER_SIZE.x, 0), 1)

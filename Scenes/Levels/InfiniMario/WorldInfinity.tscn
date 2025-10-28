@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://bupux6rvyg651"]
+[gd_scene load_steps=58 format=4 uid="uid://bupux6rvyg651"]
 
 [ext_resource type="Script" uid="uid://bcqr1v25ygedb" path="res://Scripts/Classes/LevelClass.gd" id="1_rbqoo"]
 [ext_resource type="PackedScene" uid="uid://bksxgpygrdjl7" path="res://Scenes/Prefabs/LevelBG.tscn" id="2_jgep1"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bc1mrna4kybhv" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/QuestionBlock.tscn" id="8_fj23m"]
 [ext_resource type="Script" uid="uid://b8cma3girnkbh" path="res://Scenes/Levels/InfiniMario/ChunkGridViewAnchor.gd" id="9_is140"]
 [ext_resource type="Script" uid="uid://cosn72orrjhxs" path="res://Scenes/Levels/InfiniMario/ChunkGrid.gd" id="11_0ftwy"]
-[ext_resource type="PackedScene" uid="uid://dkgu57is78lro" path="res://Scenes/Parts/PipeArea.tscn" id="11_f5vob"]
 [ext_resource type="Texture2D" uid="uid://y0c3ajq7uoei" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTemplate.png" id="14_h8vdn"]
 [ext_resource type="Script" uid="uid://biqg85fmmlh11" path="res://Scenes/Levels/InfiniMario/TileMapChunk.gd" id="14_x6did"]
 [ext_resource type="PackedScene" uid="uid://dsa8lpl7n8ge0" path="res://Scenes/Prefabs/Blocks/BrickBlocks/BrickBlock.tscn" id="15_xuia4"]
@@ -34,7 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://dn1btottv42sd" path="res://Scenes/Prefabs/Blocks/BrickBlocks/OneUpBrickBlock.tscn" id="36_aeqms"]
 [ext_resource type="PackedScene" uid="uid://cor5javglnirw" path="res://Scenes/Prefabs/Blocks/BrickBlocks/PowerUpBrickBlock.tscn" id="37_awp4t"]
 [ext_resource type="PackedScene" uid="uid://cmgahojpgp2cq" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/PowerUpQuestionBlock.tscn" id="38_me26c"]
+[ext_resource type="Script" uid="uid://ceh28krjthgae" path="res://Scenes/Levels/InfiniMario/SpriteMirroringHandler.gd" id="40_3likc"]
 [ext_resource type="Texture2D" uid="uid://clbmg515rgdhs" path="res://Assets/Sprites/Tilesets/Liquids.png" id="40_fqqfs"]
+[ext_resource type="PackedScene" uid="uid://bi1hb03wk001p" path="res://Scenes/Prefabs/Entities/Enemies/Muncher.tscn" id="40_ji43w"]
+[ext_resource type="Texture2D" uid="uid://dyy228i4nwt2" path="res://icon32.png" id="41_ji43w"]
 [ext_resource type="Texture2D" uid="uid://cnexuteg5rvye" path="res://Assets/Sprites/Tilesets/Deco/DecoTemplate.png" id="41_r63yr"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="42_ukfdu"]
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="43_elsf2"]
@@ -1785,6 +1787,25 @@ auto_death_pit = false
 script = ExtResource("9_is140")
 metadata/_custom_type_script = "uid://b8cma3girnkbh"
 
-[node name="PipeArea" parent="." instance=ExtResource("11_f5vob")]
-position = Vector2(-80, -32)
-target_level = "uid://bupux6rvyg651"
+[node name="SpriteMirroringHandler" type="Node" parent="."]
+script = ExtResource("40_3likc")
+node_groups = Array[StringName]([&"Enemies", &"Bowser", &"Coins", &"Lakitus", &"Players"])
+metadata/_custom_type_script = "uid://ceh28krjthgae"
+
+[node name="Muncher" parent="." instance=ExtResource("40_ji43w")]
+position = Vector2(-56, -56)
+
+[node name="Muncher2" parent="." instance=ExtResource("40_ji43w")]
+position = Vector2(-56, -72)
+
+[node name="Muncher3" parent="." instance=ExtResource("40_ji43w")]
+position = Vector2(-56, -88)
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Coins"]]
+position = Vector2(896, -96)
+texture = ExtResource("41_ji43w")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." groups=["Coins"]]
+modulate = Color(0.799843, 0.47731036, 0.6555047, 1)
+position = Vector2(848, -120)
+texture = ExtResource("41_ji43w")
