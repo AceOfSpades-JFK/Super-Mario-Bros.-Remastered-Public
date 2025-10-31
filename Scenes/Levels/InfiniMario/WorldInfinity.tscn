@@ -1802,10 +1802,10 @@ position = Vector2(-56, -72)
 position = Vector2(-56, -88)
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Coins"]]
-position = Vector2(896, -96)
+position = Vector2(2008, -64)
 texture = ExtResource("41_ji43w")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." groups=["Coins"]]
 modulate = Color(0.799843, 0.47731036, 0.6555047, 1)
-position = Vector2(848, -120)
+position = Vector2(1960, -88)
 texture = ExtResource("41_ji43w")
