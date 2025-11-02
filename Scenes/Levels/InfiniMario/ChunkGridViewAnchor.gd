@@ -43,7 +43,7 @@ func _physics_process(_delta: float) -> void:
 			looped_vertical.emit()
 			
 		if _parent is Player:
-			_parent.teleport_player(Vector2(modx, mody) + offset, false)
+			_parent.wrap_player(Rect2(offset, size))
 		else:
 			_parent.position = Vector2(modx, mody) + offset
 	

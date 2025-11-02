@@ -860,27 +860,34 @@ func calculate_jump_height() -> float: # Thanks wye love you xxx
 
 const SMOKE_PARTICLE = preload("res://Scenes/Prefabs/Particles/SmokeParticle.tscn")
 
-func teleport_player(new_position := Vector2.ZERO, do_smoke: bool = true) -> void:
-	if do_smoke:
-		hide()
-		do_smoke_effect()
-		var old_state = state_machine.state.name
-		state_machine.transition_to("Freeze")
-		await get_tree().create_timer(0.5, false).timeout
-		global_position = new_position
-		recenter_camera()
-		await get_tree().create_timer(0.5, false).timeout
-		state_machine.transition_to(old_state)
-		show()
-		velocity.y = 0
-		do_smoke_effect()
-	else:
-		global_position = new_position
-		recenter_camera()
-		$Camera.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
-		$Camera.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
-		$CameraHandler.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
-		$CameraHandler.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+func teleport_player(new_position := Vector2.ZERO) -> void:
+	hide()
+	do_smoke_effect()
+	var old_state = state_machine.state.name
+	state_machine.transition_to("Freeze")
+	await get_tree().create_timer(0.5, false).timeout
+	global_position = new_position
+	recenter_camera()
+	await get_tree().create_timer(0.5, false).timeout
+	state_machine.transition_to(old_state)
+	show()
+	velocity.y = 0
+	do_smoke_effect()
+
+func wrap_player(boundaries: Rect2) -> void:
+	# Wrap positions and update camera
+	global_position.x = wrap(global_position.x, boundaries.position.x, boundaries.end.x)
+	global_position.y = wrap(global_position.y, boundaries.position.y, boundaries.end.y)
+	%CameraHandler.wrap_camera(boundaries)
+	%CameraHandler.update_camera_barriers()
+	
+	# Physics interpolation (only noticible if you're REEEALLY paying attention)
+	set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+	$Camera.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	$Camera.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+	%CameraHandler.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	%CameraHandler.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
 
 func do_smoke_effect() -> void:
 	for i in 2:

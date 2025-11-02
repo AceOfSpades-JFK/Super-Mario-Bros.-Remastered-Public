@@ -157,6 +157,14 @@ func recenter_camera() -> void:
 	do_limits()
 	camera.global_position = camera_position
 
+func wrap_camera(boundaries: Rect2) -> void:
+	var diff = global_position - last_position
+	global_position.x = wrap(global_position.x, boundaries.position.x, boundaries.end.x)
+	global_position.y = wrap(global_position.y, boundaries.position.y, boundaries.end.y)
+	camera_position += diff
+	do_limits()
+	camera.global_position = camera_position + camera_offset
+
 func handle_offsets(delta: float) -> void:
 	var true_velocity = (global_position - last_position) / delta
 	var true_vel_dir = sign(true_velocity.x)
