@@ -10,12 +10,23 @@ const TILEMAP_SIZE: Vector2i = Vector2i(16, 16)
 ## Size of the foreground tilemap in pixels
 const WORLD_SIZE: Vector2i = TILEMAP_SIZE * TILE_SIZE
 
+## Pattern of the foreground tilemap
 var pattern: TileMapPattern		# Caches the tile pattern
 
+## Optional pattern of the decorative tilemap
+var decor_pattern: TileMapPattern
+
+## Dictionary of all the objects placed into the level chunk.
+##  This functions as a dictionary of PackedScenes indexed by its
+##  position in the level chunk.
+var objects: Dictionary[Vector2, PackedScene]
+
+## Size of the level chunk in tiles
 var size: Vector2i:
 	get:
 		return pattern.get_size()
 
+## Size of the level chunk in chunks
 var size_in_chunks: Vector2i:
 	get:
 		return size / LevelChunk.TILEMAP_SIZE

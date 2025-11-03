@@ -39,8 +39,9 @@ func _ready() -> void:
 		view_anchor.looped_vertical.connect(_on_looped_vertical)
 		
 		# Generate level chunks
-		for c: TileMapChunk in get_children():
+		for c: LevelChunkEntry in get_children():
 			_level_chunks.append(c.generate_level_chunk())
+			c.queue_free()
 		
 		# Randomize grid
 		for i in range(GRID_SIZE.x):
@@ -135,7 +136,7 @@ func _index_to_grid(index: int) -> Vector2i:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array[String] = []
-	if !get_children().any(func(c): return c is TileMapChunk):
-		warnings.append("This ChunkGrid has no TileMapChunk child!")
+	if !get_children().any(func(c): return c is LevelChunkEntry):
+		warnings.append("ChunkGrid node has no LevelChunkEntry child!")
 	
 	return warnings
