@@ -16,10 +16,10 @@ var pattern: TileMapPattern		# Caches the tile pattern
 ## Optional pattern of the decorative tilemap
 var decor_pattern: TileMapPattern
 
-## Dictionary of all the objects placed into the level chunk.
+## Dictionary of all the entities placed into the level chunk.
 ##  This functions as a dictionary of PackedScenes indexed by its
 ##  position in the level chunk.
-var objects: Dictionary[Vector2, PackedScene]
+var entities: Dictionary[Vector2, PackedScene]
 
 ## Size of the level chunk in tiles
 var size: Vector2i:
