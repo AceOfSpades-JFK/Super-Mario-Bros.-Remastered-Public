@@ -29,9 +29,9 @@ func _process(_delta: float) -> void:
 		if spr:
 			var cv_item: RID = spr.get_canvas_item()
 			if spr.global_position.x < BORDER_ORIGIN.x + BORDER_SIZE.x / 2:
-				RenderingServer.canvas_set_item_repeat(cv_item, Vector2(BORDER_SIZE.x, 0), 1)
+				RenderingServer.canvas_set_item_repeat(cv_item, Vector2(BORDER_SIZE.x, 0), 2)
 			else:
-				RenderingServer.canvas_set_item_repeat(cv_item, Vector2(-BORDER_SIZE.x, 0), 1)
+				RenderingServer.canvas_set_item_repeat(cv_item, Vector2(-BORDER_SIZE.x, 0), 2)
 
 
 func _on_scene_tree_node_added(n: Node) -> void:
