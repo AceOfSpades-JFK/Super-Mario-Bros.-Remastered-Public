@@ -8,10 +8,6 @@ class_name LevelChunkEntry
 ## An optional decore tilemap to draw onto the decoration tilemap
 @export var decor_tilemap: TileMapLayer
 
-const ENTITY_GROUPS = [
-	"Enemies",
-]
-
 
 func generate_level_chunk() -> LevelChunk:
 	# Set up the tilemap patterns
@@ -33,7 +29,7 @@ func generate_level_chunk() -> LevelChunk:
 	return lc
 
 func _is_in_observed_group(n: Node) -> bool:
-	return ENTITY_GROUPS.any(func(g): return n.is_in_group(g))
+	return LevelChunk.ENTITY_GROUPS.any(func(g): return n.is_in_group(g))
 
 
 func _get_configuration_warnings() -> PackedStringArray:

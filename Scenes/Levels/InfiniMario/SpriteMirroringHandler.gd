@@ -13,7 +13,7 @@ var _sprite_collection: Array[Node2D] = []
 func _enter_tree() -> void:
 	get_tree().node_added.connect(_on_scene_tree_node_added)
 	get_tree().node_removed.connect(_on_scene_tree_node_removed)
-
+	
 #func _ready() -> void:		
 	#for group in node_groups:
 		#var nodes: Array[Node] = get_tree().get_nodes_in_group(group)
@@ -23,7 +23,6 @@ func _enter_tree() -> void:
 				#_sprite_collection.append(n)
 			#nodes.append_array(n.get_children())
 			#n = nodes.pop_back()
-
 
 func _process(_delta: float) -> void:	
 	for spr: Node2D in _sprite_collection:
@@ -36,7 +35,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_scene_tree_node_added(n: Node) -> void:
-	#if node_groups.any(func(g): return n.is_in_group(g)):
+	# if !node_groups.any(func(g): return n.is_in_group(g)): return
 	if n is Node2D && (n as Node2D).get_canvas_item():
 		_sprite_collection.append(n)
 
