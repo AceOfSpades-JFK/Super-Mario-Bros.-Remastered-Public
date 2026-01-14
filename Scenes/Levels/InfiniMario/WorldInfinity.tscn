@@ -1739,6 +1739,17 @@ level_id = 0
 
 [node name="LevelBG" parent="." instance=ExtResource("2_jgep1")]
 
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(-128, -192, -128, 72)
+default_color = Color(1, 0.28627452, 0.39607844, 1)
+
+[node name="Line2D2" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(2048, 0)
+points = PackedVector2Array(-128, -192, -128, 72)
+default_color = Color(1, 0.28627452, 0.39607844, 1)
+
 [node name="Tiles" parent="." instance=ExtResource("4_ne5xm")]
 
 [node name="ChunkGrid" type="Node" parent="." node_paths=PackedStringArray("foreground", "view_anchor")]
