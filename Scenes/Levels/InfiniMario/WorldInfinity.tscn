@@ -34,11 +34,11 @@
 [ext_resource type="PackedScene" uid="uid://dn1btottv42sd" path="res://Scenes/Prefabs/Blocks/BrickBlocks/OneUpBrickBlock.tscn" id="36_aeqms"]
 [ext_resource type="PackedScene" uid="uid://cor5javglnirw" path="res://Scenes/Prefabs/Blocks/BrickBlocks/PowerUpBrickBlock.tscn" id="37_awp4t"]
 [ext_resource type="PackedScene" uid="uid://cmgahojpgp2cq" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/PowerUpQuestionBlock.tscn" id="38_me26c"]
-[ext_resource type="PackedScene" uid="uid://cmvugag0kupgu" path="res://Scenes/Prefabs/Entities/Enemies/RedKoopaTroopa.tscn" id="38_ugv3q"]
+[ext_resource type="PackedScene" uid="uid://r6dlmokkdyar" path="res://Scenes/Prefabs/Entities/Enemies/GreenKoopaTroopa.tscn" id="39_h8vdn"]
 [ext_resource type="PackedScene" uid="uid://1rxw4k4wq3ni" path="res://Scenes/Prefabs/Entities/Enemies/PiranhaPlant.tscn" id="39_rudfe"]
 [ext_resource type="Script" uid="uid://ceh28krjthgae" path="res://Scenes/Levels/InfiniMario/SpriteMirroringHandler.gd" id="40_3likc"]
 [ext_resource type="Texture2D" uid="uid://clbmg515rgdhs" path="res://Assets/Sprites/Tilesets/Liquids.png" id="40_fqqfs"]
-[ext_resource type="PackedScene" uid="uid://bi1hb03wk001p" path="res://Scenes/Prefabs/Entities/Enemies/Muncher.tscn" id="40_ji43w"]
+[ext_resource type="PackedScene" uid="uid://doo8617qiyp77" path="res://Scenes/Prefabs/Entities/Enemies/BuzzyBeetle.tscn" id="41_h8vdn"]
 [ext_resource type="Texture2D" uid="uid://cnexuteg5rvye" path="res://Assets/Sprites/Tilesets/Deco/DecoTemplate.png" id="41_r63yr"]
 [ext_resource type="PackedScene" uid="uid://4fwln7wo5cja" path="res://Scenes/Prefabs/Entities/Enemies/GreenKoopaParaTroopa.tscn" id="41_rudfe"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="42_ukfdu"]
@@ -1783,14 +1783,14 @@ tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="RedKoopaTroopa" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("38_ugv3q")]
-position = Vector2(680, 128)
-
-[node name="Goomba" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("6_ji43w")]
-position = Vector2(568, 192)
-
 [node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_rudfe")]
-position = Vector2(624, 184)
+position = Vector2(624, 176)
+
+[node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_h8vdn")]
+position = Vector2(584, 192)
+
+[node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_h8vdn")]
+position = Vector2(552, 192)
 
 [node name="LevelChunkEntry4" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
@@ -1814,21 +1814,22 @@ tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="Muncher" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("40_ji43w")]
-position = Vector2(1064, 184)
-
 [node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("39_rudfe")]
-position = Vector2(1232, 168)
+position = Vector2(1232, 160)
 
 [node name="PirannhaPlant2" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("39_rudfe")]
-position = Vector2(1200, 56)
+position = Vector2(1200, 64)
+rotation = -3.1415927
 plant_direction = 1
 
 [node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_rudfe")]
-position = Vector2(1168, 144)
+position = Vector2(1080, 152)
 
 [node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_rudfe")]
-position = Vector2(1128, 160)
+position = Vector2(1040, 168)
+
+[node name="BuzzyBeetle" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_h8vdn")]
+position = Vector2(1064, 192)
 
 [node name="Player" parent="." instance=ExtResource("21_ji43w")]
 position = Vector2(2, -67)
