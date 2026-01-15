@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://bupux6rvyg651"]
+[gd_scene format=4 uid="uid://bupux6rvyg651"]
 
 [ext_resource type="Script" uid="uid://bcqr1v25ygedb" path="res://Scripts/Classes/LevelClass.gd" id="1_rbqoo"]
 [ext_resource type="PackedScene" uid="uid://bksxgpygrdjl7" path="res://Scenes/Prefabs/LevelBG.tscn" id="2_jgep1"]
@@ -1731,126 +1731,126 @@ metadata/_better_terrain = {
 &"version": "0.2"
 }
 
-[node name="Level" type="Node"]
+[node name="Level" type="Node" unique_id=1788231811]
 script = ExtResource("1_rbqoo")
 time_limit = 10000000
 world_id = 0
 level_id = 0
 
-[node name="LevelBG" parent="." instance=ExtResource("2_jgep1")]
+[node name="LevelBG" parent="." unique_id=16229199 instance=ExtResource("2_jgep1")]
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=317956600]
 z_index = -1
 points = PackedVector2Array(-128, -192, -128, 72)
 default_color = Color(1, 0.28627452, 0.39607844, 1)
 
-[node name="Line2D2" type="Line2D" parent="."]
+[node name="Line2D2" type="Line2D" parent="." unique_id=1639790438]
 z_index = -1
 position = Vector2(2048, 0)
 points = PackedVector2Array(-128, -192, -128, 72)
 default_color = Color(1, 0.28627452, 0.39607844, 1)
 
-[node name="Tiles" parent="." instance=ExtResource("4_ne5xm")]
+[node name="Tiles" parent="." unique_id=561294092 instance=ExtResource("4_ne5xm")]
 
-[node name="ChunkGrid" type="Node" parent="." node_paths=PackedStringArray("foreground", "view_anchor")]
+[node name="ChunkGrid" type="Node" parent="." unique_id=1139029738 node_paths=PackedStringArray("foreground", "view_anchor")]
 script = ExtResource("11_0ftwy")
 foreground = NodePath("../Tiles")
 view_anchor = NodePath("../Player/ChunkGridViewAnchor")
 metadata/_custom_type_script = "uid://cosn72orrjhxs"
 
-[node name="LevelChunkEntry" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
+[node name="LevelChunkEntry" type="Node" parent="ChunkGrid" unique_id=609722922 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
-[node name="Goomba" parent="ChunkGrid/LevelChunkEntry" instance=ExtResource("6_ji43w")]
+[node name="Goomba" parent="ChunkGrid/LevelChunkEntry" unique_id=961505021 instance=ExtResource("6_ji43w")]
 position = Vector2(168, 192)
 
-[node name="Foreground" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry"]
+[node name="Foreground" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry" unique_id=1376965388]
 tile_map_data = PackedByteArray("AAAAAAwAAAABAAAAAAABAAwAAAACAAAAAAACAAwAAAACAAAAAAADAAwAAAACAAAAAAAEAAwAAAACAAAAAAAEAA0AAAACAAEAAAAFAA0AAAACAAEAAAAGAA0AAAACAAEAAAAHAA0AAAACAAEAAAAIAA0AAAACAAEAAAAJAA0AAAACAAEAAAAKAA0AAAACAAEAAAAKAAwAAAACAAAAAAALAAwAAAACAAAAAAAMAAwAAAACAAAAAAANAAwAAAACAAAAAAAOAAwAAAACAAAAAAAFAAwAAAACAAAAAAAGAAwAAAACAAAAAAAHAAwAAAACAAAAAAAIAAwAAAACAAAAAAAJAAwAAAACAAAAAAAPAAwAAAADAAAAAAAAAA0AAAABAAEAAAABAA0AAAACAAEAAAACAA0AAAACAAEAAAADAA0AAAACAAEAAAALAA0AAAACAAEAAAAMAA0AAAACAAEAAAANAA0AAAACAAEAAAAOAA0AAAACAAEAAAAPAA0AAAADAAEAAAAAAA4AAAABAAIAAAABAA4AAAACAAIAAAACAA4AAAACAAIAAAADAA4AAAACAAIAAAAEAA4AAAACAAIAAAAFAA4AAAACAAIAAAAGAA4AAAACAAIAAAAHAA4AAAACAAIAAAAIAA4AAAACAAIAAAAJAA4AAAACAAIAAAAKAA4AAAACAAIAAAALAA4AAAACAAIAAAAMAA4AAAACAAIAAAANAA4AAAACAAIAAAAOAA4AAAACAAIAAAAPAA4AAAADAAIAAAAMAAoAAAAIAAAAAAAMAAsAAAAIAAEAAAANAAoAAAAJAAAAAAANAAsAAAAJAAEAAAABAAEAAAAEAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAEAAAABAAIAAAAEAAEAAAABAAMAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="LevelChunkEntry2" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
+[node name="LevelChunkEntry2" type="Node" parent="ChunkGrid" unique_id=1988088491 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground2")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
-[node name="Foreground2" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry2"]
+[node name="Foreground2" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry2" unique_id=1480420160]
 tile_map_data = PackedByteArray("AAAQAAwAAAABAAAAAAAQAA0AAAABAAEAAAAQAA4AAAABAAIAAAARAAwAAAACAAAAAAARAA0AAAACAAEAAAARAA4AAAACAAIAAAASAAwAAAACAAAAAAASAA0AAAACAAEAAAASAA4AAAACAAIAAAATAAwAAAACAAAAAAATAA0AAAACAAEAAAATAA4AAAACAAIAAAAUAAwAAAACAAAAAAAUAA0AAAACAAEAAAAUAA4AAAACAAIAAAAVAAwAAAACAAAAAAAVAA0AAAACAAEAAAAVAA4AAAACAAIAAAAWAAwAAAACAAAAAAAWAA0AAAACAAEAAAAWAA4AAAACAAIAAAAXAAwAAAACAAAAAAAXAA0AAAACAAEAAAAXAA4AAAACAAIAAAAYAAwAAAACAAAAAAAYAA0AAAACAAEAAAAYAA4AAAACAAIAAAAZAAwAAAACAAAAAAAZAA0AAAACAAEAAAAZAA4AAAACAAIAAAAaAAgAAAAIAAAAAAAaAAkAAAAIAAEAAAAaAAoAAAAIAAEAAAAaAAsAAAAIAAEAAAAaAAwAAAACAAAAAAAaAA0AAAACAAEAAAAaAA4AAAACAAIAAAAbAAgAAAAJAAAAAAAbAAkAAAAJAAEAAAAbAAoAAAAJAAEAAAAbAAsAAAAJAAEAAAAbAAwAAAACAAAAAAAbAA0AAAACAAEAAAAbAA4AAAACAAIAAAAcAAoAAAAIAAAAAAAcAAsAAAAIAAEAAAAcAAwAAAACAAAAAAAcAA0AAAACAAEAAAAcAA4AAAACAAIAAAAdAAoAAAAJAAAAAAAdAAsAAAAJAAEAAAAdAAwAAAACAAAAAAAdAA0AAAACAAEAAAAdAA4AAAACAAIAAAAeAAwAAAACAAAAAAAeAA0AAAACAAEAAAAeAA4AAAACAAIAAAAfAAwAAAADAAAAAAAfAA0AAAADAAEAAAAfAA4AAAADAAIAAAARAAEAAAAEAAEAAAARAAMAAAAEAAEAAAASAAEAAAAEAAEAAAAQAAAAAAAEAAEAAAAQAAIAAAAEAAEAAAAQAAMAAAAEAAEAAAARAAAAAAAEAAEAAAASAAAAAAAEAAEAAAASAAMAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="LevelChunkEntry3" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
+[node name="LevelChunkEntry3" type="Node" parent="ChunkGrid" unique_id=396019773 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground3")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
-[node name="Foreground3" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry3"]
+[node name="Foreground3" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry3" unique_id=989192136]
 tile_map_data = PackedByteArray("AAAgAAwAAAABAAAAAAAgAA0AAAABAAEAAAAgAA4AAAABAAIAAAAhAAwAAAACAAAAAAAhAA0AAAACAAEAAAAhAA4AAAACAAIAAAAiAAwAAAACAAAAAAAiAA0AAAACAAEAAAAiAA4AAAACAAIAAAAjAAwAAAACAAAAAAAjAA0AAAACAAEAAAAjAA4AAAACAAIAAAAkAAwAAAACAAAAAAAkAA0AAAACAAEAAAAkAA4AAAACAAIAAAAlAAwAAAADAAAAAAAlAA0AAAADAAEAAAAlAA4AAAADAAIAAAAmAAwAAAAIAAEAAAAmAA0AAAAIAAEAAAAmAA4AAAAIAAEAAAAnAAwAAAAJAAEAAAAnAA0AAAAJAAEAAAAnAA4AAAAJAAEAAAAoAAwAAAABAAAAAAAoAA0AAAABAAEAAAAoAA4AAAABAAIAAAApAAwAAAACAAAAAAApAA0AAAACAAEAAAApAA4AAAACAAIAAAAqAAgAAAAIAAAAAAAqAAkAAAAIAAEAAAAqAAoAAAAIAAEAAAAqAAsAAAAIAAEAAAAqAAwAAAACAAAAAAAqAA0AAAACAAEAAAAqAA4AAAACAAIAAAArAAgAAAAJAAAAAAArAAkAAAAJAAEAAAArAAoAAAAJAAEAAAArAAsAAAAJAAEAAAArAAwAAAACAAAAAAArAA0AAAACAAEAAAArAA4AAAACAAIAAAAsAAoAAAAIAAAAAAAsAAsAAAAIAAEAAAAsAAwAAAACAAAAAAAsAA0AAAACAAEAAAAsAA4AAAACAAIAAAAtAAoAAAAJAAAAAAAtAAsAAAAJAAEAAAAtAAwAAAACAAAAAAAtAA0AAAACAAEAAAAtAA4AAAACAAIAAAAuAAwAAAACAAAAAAAuAA0AAAACAAEAAAAuAA4AAAACAAIAAAAvAAwAAAADAAAAAAAvAA0AAAADAAEAAAAvAA4AAAADAAIAAAAmAAsAAAAIAAAAAAAnAAsAAAAJAAAAAAAhAAEAAAAEAAEAAAAiAAEAAAAEAAEAAAAiAAIAAAAEAAEAAAAgAAAAAAAEAAEAAAAgAAMAAAAEAAEAAAAhAAAAAAAEAAEAAAAhAAMAAAAEAAEAAAAiAAAAAAAEAAEAAAAiAAMAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_rudfe")]
+[node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry3" unique_id=1741095288 instance=ExtResource("39_rudfe")]
 position = Vector2(624, 176)
 
-[node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_h8vdn")]
+[node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry3" unique_id=1964899537 instance=ExtResource("39_h8vdn")]
 position = Vector2(584, 192)
 
-[node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry3" instance=ExtResource("39_h8vdn")]
+[node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry3" unique_id=1102271203 instance=ExtResource("39_h8vdn")]
 position = Vector2(552, 192)
 
-[node name="LevelChunkEntry4" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
+[node name="LevelChunkEntry4" type="Node" parent="ChunkGrid" unique_id=442605261 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground4")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
-[node name="Foreground4" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry4"]
+[node name="Foreground4" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry4" unique_id=1067634532]
 tile_map_data = PackedByteArray("AAAwAAwAAAABAAAAAAAwAA0AAAABAAEAAAAwAA4AAAABAAIAAAAxAAwAAAACAAAAAAAxAA0AAAACAAEAAAAxAA4AAAACAAIAAAAyAAwAAAACAAAAAAAyAA0AAAACAAEAAAAyAA4AAAACAAIAAAAzAAwAAAACAAAAAAAzAA0AAAACAAEAAAAzAA4AAAACAAIAAAA0AAwAAAACAAAAAAA0AA0AAAACAAEAAAA0AA4AAAACAAIAAAA1AAwAAAADAAAAAAA1AA0AAAADAAEAAAA1AA4AAAADAAIAAAA2AAsAAAAIAAAAAAA2AAwAAAAIAAEAAAA2AA0AAAAIAAEAAAA2AA4AAAAIAAEAAAA3AAsAAAAJAAAAAAA3AAwAAAAJAAEAAAA3AA0AAAAJAAEAAAA3AA4AAAAJAAEAAAA4AAwAAAABAAAAAAA4AA0AAAABAAEAAAA4AA4AAAABAAIAAAA5AAwAAAACAAAAAAA5AA0AAAACAAEAAAA5AA4AAAACAAIAAAA6AAgAAAAIAAAAAAA6AAkAAAAIAAEAAAA6AAoAAAAMAAAAAAA6AAsAAAAMAAEAAAA6AAwAAAACAAAAAAA6AA0AAAACAAEAAAA6AA4AAAACAAIAAAA7AAgAAAAJAAAAAAA7AAkAAAAJAAEAAAA7AAoAAAAJAAEAAAA7AAsAAAAJAAEAAAA7AAwAAAACAAAAAAA7AA0AAAACAAEAAAA7AA4AAAACAAIAAAA8AAoAAAAIAAAAAAA8AAsAAAAIAAEAAAA8AAwAAAACAAAAAAA8AA0AAAACAAEAAAA8AA4AAAACAAIAAAA9AAoAAAAJAAAAAAA9AAsAAAAJAAEAAAA9AAwAAAACAAAAAAA9AA0AAAACAAEAAAA9AA4AAAACAAIAAAA+AAwAAAACAAAAAAA+AA0AAAACAAEAAAA+AA4AAAACAAIAAAA/AAwAAAADAAAAAAA/AA0AAAADAAEAAAA/AA4AAAADAAIAAAA4AAoAAAAKAAAAAAA4AAsAAAAKAAEAAAA5AAoAAAALAAAAAAA5AAsAAAALAAEAAAAxAAEAAAAEAAEAAAAyAAIAAAAEAAEAAAAwAAAAAAAEAAEAAAAwAAEAAAAEAAEAAAAyAAAAAAAEAAEAAAAyAAEAAAAEAAEAAAAyAAMAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="LevelChunkEntry5" type="Node" parent="ChunkGrid" node_paths=PackedStringArray("foreground_tilemap")]
+[node name="LevelChunkEntry5" type="Node" parent="ChunkGrid" unique_id=2007692622 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground5")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
-[node name="Foreground5" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry5"]
+[node name="Foreground5" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry5" unique_id=1272912277]
 tile_map_data = PackedByteArray("AABAAAwAAAABAAAAAABAAA0AAAABAAEAAABAAA4AAAABAAIAAABBAAwAAAACAAAAAABBAA0AAAACAAEAAABBAA4AAAACAAIAAABCAAwAAAACAAAAAABCAA0AAAACAAEAAABCAA4AAAACAAIAAABDAAwAAAACAAAAAABDAA0AAAACAAEAAABDAA4AAAACAAIAAABEAAwAAAACAAAAAABEAA0AAAACAAEAAABEAA4AAAACAAIAAABFAAwAAAADAAAAAABFAA0AAAADAAEAAABFAA4AAAADAAIAAABGAAsAAAAIAAAAAABGAAwAAAAIAAEAAABGAA0AAAAIAAEAAABGAA4AAAAIAAEAAABHAAsAAAAJAAAAAABHAAwAAAAJAAEAAABHAA0AAAAJAAEAAABHAA4AAAAJAAEAAABIAAwAAAABAAAAAABIAA0AAAABAAEAAABIAA4AAAABAAIAAABJAAwAAAACAAAAAABJAA0AAAACAAEAAABJAA4AAAACAAIAAABKAAgAAAAIAAAAAABKAAkAAAAIAAEAAABKAAoAAAAMAAAAAABKAAsAAAAMAAEAAABKAAwAAAACAAAAAABKAA0AAAACAAEAAABKAA4AAAACAAIAAABLAAgAAAAJAAAAAABLAAkAAAAJAAEAAABLAAoAAAAJAAEAAABLAAsAAAAJAAEAAABLAAwAAAACAAAAAABLAA0AAAACAAEAAABLAA4AAAACAAIAAABMAAoAAAAIAAAAAABMAAsAAAAIAAEAAABMAAwAAAACAAAAAABMAA0AAAACAAEAAABMAA4AAAACAAIAAABNAAoAAAAJAAAAAABNAAsAAAAJAAEAAABNAAwAAAACAAAAAABNAA0AAAACAAEAAABNAA4AAAACAAIAAABOAAwAAAACAAAAAABOAA0AAAACAAEAAABOAA4AAAACAAIAAABPAAwAAAADAAAAAABPAA0AAAADAAEAAABPAA4AAAADAAIAAABIAAoAAAAKAAAAAABIAAsAAAAKAAEAAABJAAoAAAALAAAAAABJAAsAAAALAAEAAABKAAMAAAAIAAAAAABLAAMAAAAJAAAAAABKAAIAAAAIAAEAAABLAAIAAAAJAAEAAABKAAEAAAAEAAIAAABLAAEAAAAEAAIAAABBAAEAAAAEAAEAAABCAAIAAAAEAAEAAABAAAAAAAAEAAEAAABAAAEAAAAEAAEAAABAAAMAAAAEAAEAAABBAAAAAAAEAAEAAABBAAMAAAAEAAEAAABCAAAAAAAEAAEAAABCAAMAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_osvs1")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("39_rudfe")]
+[node name="PirannhaPlant" parent="ChunkGrid/LevelChunkEntry5" unique_id=1689280402 instance=ExtResource("39_rudfe")]
 position = Vector2(1232, 160)
 
-[node name="PirannhaPlant2" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("39_rudfe")]
+[node name="PirannhaPlant2" parent="ChunkGrid/LevelChunkEntry5" unique_id=1973962770 instance=ExtResource("39_rudfe")]
 position = Vector2(1200, 64)
 rotation = -3.1415927
 plant_direction = 1
 
-[node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_rudfe")]
+[node name="GreenKoopaTroopa" parent="ChunkGrid/LevelChunkEntry5" unique_id=630379190 instance=ExtResource("41_rudfe")]
 position = Vector2(1080, 152)
 
-[node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_rudfe")]
+[node name="GreenKoopaTroopa2" parent="ChunkGrid/LevelChunkEntry5" unique_id=1611855183 instance=ExtResource("41_rudfe")]
 position = Vector2(1040, 168)
 
-[node name="BuzzyBeetle" parent="ChunkGrid/LevelChunkEntry5" instance=ExtResource("41_h8vdn")]
+[node name="BuzzyBeetle" parent="ChunkGrid/LevelChunkEntry5" unique_id=216292274 instance=ExtResource("41_h8vdn")]
 position = Vector2(1064, 192)
 
-[node name="Player" parent="." instance=ExtResource("21_ji43w")]
+[node name="Player" parent="." unique_id=1155370132 instance=ExtResource("21_ji43w")]
 position = Vector2(2, -67)
 auto_death_pit = false
 
-[node name="ChunkGridViewAnchor" type="Node" parent="Player"]
+[node name="ChunkGridViewAnchor" type="Node" parent="Player" unique_id=1157278391]
 script = ExtResource("9_is140")
 metadata/_custom_type_script = "uid://b8cma3girnkbh"
 
-[node name="SpriteMirroringHandler" type="Node" parent="."]
+[node name="SpriteMirroringHandler" type="Node" parent="." unique_id=1988229612]
 script = ExtResource("40_3likc")
 node_groups = Array[StringName]([&"Enemies", &"Bowser", &"Coins", &"Lakitus", &"Players"])
 metadata/_custom_type_script = "uid://ceh28krjthgae"
