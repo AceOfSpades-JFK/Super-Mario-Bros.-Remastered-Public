@@ -1,6 +1,10 @@
 extends RefCounted
 class_name LevelChunk
 
+class PackedEntity:
+	var scene: PackedScene
+	var init_position: Vector2
+
 ## Size of the tiles in pixels.
 const TILE_SIZE = Vector2i(16, 16)
 
@@ -24,7 +28,7 @@ var decor_pattern: TileMapPattern
 ## Dictionary of all the entities placed into the level chunk.
 ##  This functions as a dictionary of PackedScenes indexed by its
 ##  position in the level chunk.
-var entities: Dictionary[Vector2, PackedScene]
+var entities: Array[PackedEntity]
 
 ## Size of the level chunk in tiles
 var size: Vector2i:
@@ -36,9 +40,18 @@ var size_in_chunks: Vector2i:
 	get:
 		return size / LevelChunk.TILEMAP_SIZE
 
+## Offset of where the upper-leftmost should be placed
+var tile_offset: Vector2i
+
 
 func _init(p: TileMapPattern) -> void:
 	pattern = p
+
+func add_entity(position: Vector2, packed_entity: PackedScene) -> void:
+	var entry: PackedEntity = PackedEntity.new()
+	entry.scene = packed_entity
+	entry.init_position = position
+	entities.append(entry)
 
 func get_used_cells() -> Array[Vector2i]:
 	return pattern.get_used_cells()

@@ -40,8 +40,7 @@ func _ready() -> void:
 		
 		# Generate level chunks
 		for c: LevelChunkEntry in get_children():
-			_level_chunks.append(c.generate_level_chunk())
-			c.queue_free()
+			_level_chunks.append(c.level_chunk)
 		
 		# Randomize grid
 		for i in range(GRID_SIZE.x):
@@ -82,22 +81,28 @@ func _set_chunk_tilemap(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gr
 	var old_id = _grid[index]
 	var old_chunk = _level_chunks[old_id]
 	_clear_pattern(tilepos, old_chunk.pattern)
-	_clear_pattern(tilepos + Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
-	_clear_pattern(tilepos - Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
-	_clear_pattern(tilepos + Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
-	_clear_pattern(tilepos - Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
-	_clear_pattern(tilepos + MAX_TILEMAP_SIZE, old_chunk.pattern)
-	_clear_pattern(tilepos - MAX_TILEMAP_SIZE, old_chunk.pattern)
+	if GRID_SIZE.x > 1:
+		_clear_pattern(tilepos + Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
+		_clear_pattern(tilepos - Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
+	if GRID_SIZE.y > 1:
+		_clear_pattern(tilepos + Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
+		_clear_pattern(tilepos - Vector2i(0, MAX_TILEMAP_SIZE.y), old_chunk.pattern)
+	if GRID_SIZE.x > 1 && GRID_SIZE.y > 1:
+		_clear_pattern(tilepos + MAX_TILEMAP_SIZE, old_chunk.pattern)
+		_clear_pattern(tilepos - MAX_TILEMAP_SIZE, old_chunk.pattern)
 
 	_grid[index] = new_id
 	var new_chunk = _get_level_chunk(index)
 	_set_pattern(tilepos, new_chunk.pattern)
-	_set_pattern(tilepos + Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
-	_set_pattern(tilepos - Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
-	_set_pattern(tilepos + Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
-	_set_pattern(tilepos - Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
-	_set_pattern(tilepos + MAX_TILEMAP_SIZE, new_chunk.pattern)
-	_set_pattern(tilepos - MAX_TILEMAP_SIZE, new_chunk.pattern)
+	if GRID_SIZE.x > 1:
+		_set_pattern(tilepos + Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
+		_set_pattern(tilepos - Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
+	if GRID_SIZE.y > 1:
+		_set_pattern(tilepos + Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
+		_set_pattern(tilepos - Vector2i(0, MAX_TILEMAP_SIZE.y), new_chunk.pattern)
+	if GRID_SIZE.x > 1 && GRID_SIZE.y > 1:
+		_set_pattern(tilepos + MAX_TILEMAP_SIZE, new_chunk.pattern)
+		_set_pattern(tilepos - MAX_TILEMAP_SIZE, new_chunk.pattern)
 
 func _set_pattern(tile_offset: Vector2i, pattern: TileMapPattern):
 	foreground.set_pattern(tile_offset,  pattern)
@@ -111,10 +116,11 @@ func _spawn_chunk_entities(gridpos: Vector2i, new_id: int = _grid[_grid_to_index
 	var tilepos = _grid_to_tile(gridpos)
 	var index = _grid_to_index(gridpos)
 	var new_chunk = _get_level_chunk(index)
-	for objpos in new_chunk.entities.keys():
-		var obj: Node2D = new_chunk.entities[objpos].instantiate()
-		obj.global_position = objpos + Vector2(tilepos) * Vector2(LevelChunk.TILE_SIZE)
+	for packed_entity in new_chunk.entities:
+		var obj: Node2D = packed_entity.scene.instantiate()
+		obj.global_position = packed_entity.init_position + Vector2(tilepos) * Vector2(LevelChunk.TILE_SIZE)
 		add_sibling(obj)
+		obj.owner = get_parent()
 
 func _delete_chunk_entities(gridpos: Vector2i) -> void:
 	var chunk_origin: Vector2 = _grid_to_world(gridpos)
