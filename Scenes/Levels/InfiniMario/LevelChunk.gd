@@ -4,6 +4,7 @@ class_name LevelChunk
 class PackedEntity:
 	var scene: PackedScene
 	var init_position: Vector2
+	var property_overrides: Dictionary
 
 ## Size of the tiles in pixels.
 const TILE_SIZE = Vector2i(16, 16)
@@ -47,10 +48,11 @@ var tile_offset: Vector2i
 func _init(p: TileMapPattern) -> void:
 	pattern = p
 
-func add_entity(position: Vector2, packed_entity: PackedScene) -> void:
+func add_entity(position: Vector2, packed_entity: PackedScene, overrides: Dictionary = {}) -> void:
 	var entry: PackedEntity = PackedEntity.new()
 	entry.scene = packed_entity
 	entry.init_position = position
+	entry.property_overrides = overrides
 	entities.append(entry)
 
 func get_used_cells() -> Array[Vector2i]:

@@ -31,12 +31,16 @@ func _enter_tree() -> void:
 	# Set up the entities
 	for c: Node in get_children():
 		if _is_in_observed_group(c):
+			var ps: PackedScene = PackedScene.new()
+			var result: Error = ps.pack(c)
 			var offset: Vector2 = Vector2(fg_origin * foreground_tilemap.tile_set.tile_size)
 			if c.scene_file_path:
-				lc.add_entity(c.global_position - offset, load(c.scene_file_path))
+				var base_ps: PackedScene = load(c.scene_file_path)
+				var dic: Dictionary = {}
+				for p in c.get_property_list().map(func(e): return e.name):
+					dic[p] = c.get(p)
+				lc.add_entity(c.global_position - offset, base_ps, dic)
 			else:
-				var ps: PackedScene = PackedScene.new()
-				var result: Error = ps.pack(c)
 				if result == OK:
 					#lc.entities[c.global_position - offset] = ps
 					lc.add_entity(c.global_position - offset, ps)

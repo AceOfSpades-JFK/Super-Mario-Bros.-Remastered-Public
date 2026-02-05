@@ -118,9 +118,12 @@ func _spawn_chunk_entities(gridpos: Vector2i, new_id: int = _grid[_grid_to_index
 	var new_chunk = _get_level_chunk(index)
 	for packed_entity in new_chunk.entities:
 		var obj: Node2D = packed_entity.scene.instantiate()
+		for p in packed_entity.property_overrides.keys():
+			obj.set(p, packed_entity.property_overrides[p])
 		obj.global_position = packed_entity.init_position + Vector2(tilepos) * Vector2(LevelChunk.TILE_SIZE)
 		add_child(obj)
 		obj.owner = self
+		obj.request_ready()
 
 func _delete_chunk_entities(gridpos: Vector2i) -> void:
 	var chunk_origin: Vector2 = _grid_to_world(gridpos)
