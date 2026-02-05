@@ -119,8 +119,8 @@ func _spawn_chunk_entities(gridpos: Vector2i, new_id: int = _grid[_grid_to_index
 	for packed_entity in new_chunk.entities:
 		var obj: Node2D = packed_entity.scene.instantiate()
 		obj.global_position = packed_entity.init_position + Vector2(tilepos) * Vector2(LevelChunk.TILE_SIZE)
-		add_sibling(obj)
-		obj.owner = get_parent()
+		add_child(obj)
+		obj.owner = self
 
 func _delete_chunk_entities(gridpos: Vector2i) -> void:
 	var chunk_origin: Vector2 = _grid_to_world(gridpos)

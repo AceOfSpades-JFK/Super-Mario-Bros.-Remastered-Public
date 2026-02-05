@@ -31,12 +31,15 @@ func _enter_tree() -> void:
 	# Set up the entities
 	for c: Node in get_children():
 		if _is_in_observed_group(c):
-			var ps: PackedScene = PackedScene.new()
-			var result: Error = ps.pack(c)
 			var offset: Vector2 = Vector2(fg_origin * foreground_tilemap.tile_set.tile_size)
-			if result == OK:
-				#lc.entities[c.global_position - offset] = ps
-				lc.add_entity(c.global_position - offset, ps)
+			if c.scene_file_path:
+				lc.add_entity(c.global_position - offset, load(c.scene_file_path))
+			else:
+				var ps: PackedScene = PackedScene.new()
+				var result: Error = ps.pack(c)
+				if result == OK:
+					#lc.entities[c.global_position - offset] = ps
+					lc.add_entity(c.global_position - offset, ps)
 		c.queue_free()
 	
 	level_chunk = lc
