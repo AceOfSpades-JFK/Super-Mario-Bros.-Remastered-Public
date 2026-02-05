@@ -48,6 +48,33 @@ func _enter_tree() -> void:
 	
 	level_chunk = lc
 
+func _compare_scene_state_string(sta: SceneState, stb: SceneState) -> String:
+	var string: String = ""
+
+	assert(sta.get_node_count() == stb.get_node_count())
+	for n in range(sta.get_node_count()):
+		string += str("%s:%s\n" % [sta.get_node_property_count(n), stb.get_node_property_count(n)])
+		for npa in range(min(sta.get_node_property_count(n), stb.get_node_property_count(n))):
+			var npb: int = npa
+			while npb < stb.get_node_property_count(n)-1 && sta.get_node_property_name(n, npa) != stb.get_node_property_name(n, npb):
+				npb += 1
+			var va = str(sta.get_node_property_value(n, npa))
+			var vb = str(stb.get_node_property_value(n, npb))
+			if va != vb:
+				string += "-----------------\n"
+				string += str("[%s] %s: %s\n" % [sta.get_node_name(n), sta.get_node_property_name(n, npa), str(sta.get_node_property_value(n, npa))])
+				string += "is not equal to\n"
+				string += str("[%s] %s: %s\n" % [stb.get_node_name(n), stb.get_node_property_name(n, npb), str(stb.get_node_property_value(n, npb))])
+		string += "============================\n"
+	return string
+
+func _get_scene_state_string(st: SceneState) -> String:
+	var string: String
+	for n in range(st.get_node_count()):
+		for np in range(st.get_node_property_count(n)):
+			string += str("[%s] %s: %s\n" % [st.get_node_name(n), st.get_node_property_name(n, np), str(st.get_node_property_value(n, np))])
+	return string
+
 func _is_in_observed_group(n: Node) -> bool:
 	return LevelChunk.ENTITY_GROUPS.any(func(g): return n.is_in_group(g))
 
