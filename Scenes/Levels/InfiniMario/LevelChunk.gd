@@ -42,7 +42,7 @@ var size_in_chunks: Vector2i:
 		return size / LevelChunk.TILEMAP_SIZE
 
 ## Offset of where the upper-leftmost should be placed
-var tile_offset: Vector2i
+var tilemap_offset: Vector2i
 
 
 func _init(p: TileMapPattern) -> void:
