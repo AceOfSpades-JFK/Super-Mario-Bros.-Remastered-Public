@@ -44,6 +44,9 @@ var size_in_chunks: Vector2i:
 ## Offset of where the upper-leftmost should be placed
 var tilemap_offset: Vector2i
 
+## Used to determine what chunk to generate next
+var chunk_selector: ChunkSelector
+
 
 func _init(p: TileMapPattern) -> void:
 	pattern = p

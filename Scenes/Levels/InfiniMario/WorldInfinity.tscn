@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="4_ne5xm"]
 [ext_resource type="Script" uid="uid://cjmyu251y7mf7" path="res://Scenes/Levels/InfiniMario/LevelChunkEntry.gd" id="5_ji43w"]
 [ext_resource type="PackedScene" uid="uid://dnx48rakxib6u" path="res://Scenes/Prefabs/Entities/Enemies/Goomba.tscn" id="6_ji43w"]
+[ext_resource type="Script" uid="uid://csu45gtokmidt" path="res://Scenes/Levels/InfiniMario/ChunkSelectorStatic.gd" id="6_xuia4"]
 [ext_resource type="PackedScene" uid="uid://cqvr7a6e84oti" path="res://Scenes/Prefabs/Blocks/BrickBlocks/CoinBrickBlock.tscn" id="7_g2aeb"]
 [ext_resource type="PackedScene" uid="uid://bc1mrna4kybhv" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/QuestionBlock.tscn" id="8_fj23m"]
 [ext_resource type="Script" uid="uid://b8cma3girnkbh" path="res://Scenes/Levels/InfiniMario/ChunkGridViewAnchor.gd" id="9_is140"]
@@ -45,6 +46,11 @@
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="43_elsf2"]
 [ext_resource type="Texture2D" uid="uid://cays8e2m7oj1l" path="res://Assets/Sprites/Tilesets/EdgeConnectionTile.png" id="44_dpuw2"]
 [ext_resource type="Script" uid="uid://cgul2ybbel06t" path="res://Scenes/Levels/InfiniMario/ChunkGridPositionWrapper.gd" id="44_h8vdn"]
+
+[sub_resource type="Resource" id="Resource_4ukp5"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry2")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b6qiv"]
 tile_data = PackedInt32Array(0, 524288, 0, 1, 589824, 0)
@@ -1732,6 +1738,26 @@ metadata/_better_terrain = {
 &"version": "0.2"
 }
 
+[sub_resource type="Resource" id="Resource_xuia4"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry3")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_mmgx0"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry4")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_6b24w"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry5")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_qd8dq"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
 [node name="Level" type="Node" unique_id=1788231811]
 script = ExtResource("1_rbqoo")
 time_limit = 10000000
@@ -1761,6 +1787,7 @@ metadata/_custom_type_script = "uid://cosn72orrjhxs"
 [node name="LevelChunkEntry" type="Node" parent="ChunkGrid" unique_id=609722922 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground")
+chunk_selector = SubResource("Resource_4ukp5")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Goomba" parent="ChunkGrid/LevelChunkEntry" unique_id=961505021 instance=ExtResource("6_ji43w")]
@@ -1775,6 +1802,7 @@ navigation_enabled = false
 [node name="LevelChunkEntry2" type="Node" parent="ChunkGrid" unique_id=1988088491 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground2")
+chunk_selector = SubResource("Resource_xuia4")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Foreground2" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry2" unique_id=1480420160]
@@ -1789,6 +1817,7 @@ position = Vector2(336, 192)
 [node name="LevelChunkEntry3" type="Node" parent="ChunkGrid" unique_id=396019773 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground3")
+chunk_selector = SubResource("Resource_mmgx0")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Foreground3" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry3" unique_id=989192136]
@@ -1803,6 +1832,7 @@ position = Vector2(552, 192)
 [node name="LevelChunkEntry4" type="Node" parent="ChunkGrid" unique_id=442605261 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground4")
+chunk_selector = SubResource("Resource_6b24w")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Foreground4" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry4" unique_id=1067634532]
@@ -1817,6 +1847,7 @@ position = Vector2(832, 192)
 [node name="LevelChunkEntry5" type="Node" parent="ChunkGrid" unique_id=2007692622 node_paths=PackedStringArray("foreground_tilemap")]
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground5")
+chunk_selector = SubResource("Resource_qd8dq")
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Foreground5" type="TileMapLayer" parent="ChunkGrid/LevelChunkEntry5" unique_id=1272912277]

@@ -39,7 +39,7 @@ func _ready() -> void:
 		
 		# Generate level chunks
 		for c: LevelChunkEntry in get_children():
-			_level_chunks.append_array(c.get_level_chunks())
+			_level_chunks.append(c.level_chunk)
 		
 		# Randomize grid
 		for i in range(GRID_SIZE.x):
