@@ -27,10 +27,14 @@ func _enter_tree() -> void:
 
 	# Get the upper leftmost tile 
 	var minv: Vector2i = Vector2i(2000000000, 2000000000)	# I can't remember the exact number
+	var maxv: Vector2i = Vector2i(-2000000000, -2000000000)	
 	for i in range(used_cells.size()):
 		minv.x = min(used_cells[i].x, minv.x)
 		minv.y = min(used_cells[i].y, minv.y)
+		maxv.x = max(used_cells[i].x, maxv.x)
+		maxv.y = max(used_cells[i].y, maxv.y)
 	var fg_origin: Vector2i = minv
+	var size_in_chunks: Vector2i = fg_origin / LevelChunk.TILEMAP_SIZE
 	print(fg_origin)
 
 	# Create the Level Chunk
@@ -45,7 +49,8 @@ func _enter_tree() -> void:
 		if _is_in_observed_group(c):
 			var ps: PackedScene = PackedScene.new()
 			var result: Error = ps.pack(c)
-			var pos: Vector2 = Vector2(posmod(c.global_position.x, LevelChunk.WORLD_SIZE.x), posmod(c.global_position.y, LevelChunk.WORLD_SIZE.y))
+			var pos: Vector2 = Vector2(posmod(c.global_position.x, LevelChunk.WORLD_SIZE.x), \
+									   posmod(c.global_position.y, LevelChunk.WORLD_SIZE.y))
 			if c.scene_file_path:
 				var base_ps: PackedScene = load(c.scene_file_path)
 				var dic: Dictionary = {}
