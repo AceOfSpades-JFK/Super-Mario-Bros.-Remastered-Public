@@ -11,7 +11,10 @@ class_name LevelChunkEntry
 ## An optional decore tilemap to draw onto the decoration tilemap
 @export var decor_tilemap: TileMapLayer
 
+## Determines which chunk to generate next
 @export var chunk_selector: ChunkSelector
+
+@export var starting_chunk: bool = false
 
 ## The actual instance of LevelChunk data. Created upon entering the tree
 var level_chunk: LevelChunk
@@ -41,12 +44,11 @@ func _enter_tree() -> void:
 
 	# Create the Level Chunk
 	var lc: LevelChunk = LevelChunk.new(fg)
+	lc.starting_chunk = starting_chunk
 	lc.tilemap_offset.x = posmod(fg_origin.x, LevelChunk.TILEMAP_SIZE.x)
 	lc.tilemap_offset.y = posmod(fg_origin.y, LevelChunk.TILEMAP_SIZE.y)
 	if decor_tilemap:
 		lc.decor_pattern = decor_tilemap.get_pattern(decor_tilemap.get_used_cells())
-	chunk_selector.initialize.call_deferred(self)
-	level_chunk.chunk_selector = chunk_selector
 	
 	# Set up the entities
 	for c: Node in get_children():
@@ -67,6 +69,13 @@ func _enter_tree() -> void:
 					lc.add_entity(pos, ps)
 		c.queue_free()
 	level_chunk = lc
+
+func _ready() -> void:
+	if Engine.is_editor_hint(): return
+	
+	# Set up the chunk selector
+	chunk_selector.initialize(self)
+	level_chunk.chunk_selector = chunk_selector
 
 
 func get_level_chunks() -> Array[LevelChunk]:

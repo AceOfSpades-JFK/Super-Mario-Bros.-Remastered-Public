@@ -1788,6 +1788,7 @@ metadata/_custom_type_script = "uid://cosn72orrjhxs"
 script = ExtResource("5_ji43w")
 foreground_tilemap = NodePath("Foreground")
 chunk_selector = SubResource("Resource_4ukp5")
+starting_chunk = true
 metadata/_custom_type_script = "uid://cjmyu251y7mf7"
 
 [node name="Goomba" parent="ChunkGrid/LevelChunkEntry" unique_id=961505021 instance=ExtResource("6_ji43w")]

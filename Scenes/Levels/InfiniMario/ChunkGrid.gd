@@ -14,8 +14,9 @@ const MAX_WORLD_SIZE: Vector2i = MAX_TILEMAP_SIZE * LevelChunk.TILE_SIZE
 		_e_update_marker()
 
 var _level_chunks: Array[LevelChunk]
+var _starting_chunks: Array[LevelChunk]
 
-var _grid: Array[int] = []	# Holds indices to the level chunks array
+var _grid: Array[LevelChunk] = []	# Holds indices to the level chunks array
 
 var _e_marker: Marker2D = Marker2D.new()
 
@@ -40,12 +41,19 @@ func _ready() -> void:
 		# Generate level chunks
 		for c: LevelChunkEntry in get_children():
 			_level_chunks.append(c.level_chunk)
+			if c.starting_chunk:
+				_starting_chunks.append(c.level_chunk)
 		
 		# Randomize grid
-		for i in range(GRID_SIZE.x):
-			_grid[i] = randi_range(0,  _level_chunks.size()-1)
+		for i in range(0, GRID_SIZE.x):
+			var new_chunk: LevelChunk
+			if i == 0:
+				new_chunk = _starting_chunks[randi_range(0, _starting_chunks.size()-1)]
+			else:
+				new_chunk = _get_level_chunk(i-1).next_chunk()
+			
 			var gp = _index_to_grid(i)
-			_set_chunk_tilemap(gp)
+			_set_chunk_tilemap(gp, new_chunk)
 			_spawn_chunk_entities.call_deferred(gp)
 
 	
@@ -63,22 +71,24 @@ func update_tilemap(gridpos: Vector2i, direction: Vector2i) -> void:
 	var draw_dist: int = min(ceili(aspect), GRID_SIZE.x-1)
 	
 	var dest = (gridpos + (direction*draw_dist))
-	var modx = posmod(dest.x, GRID_SIZE.x)
-	var mody = posmod(dest.y, GRID_SIZE.y)
-	var modp = Vector2i(modx, mody)
-	var rand_id = randi_range(0, _level_chunks.size()-1)
-	while rand_id == _grid[_grid_to_index(gridpos)]:
-		rand_id = randi_range(0, _level_chunks.size()-1)
+	var modp = LevelChunk.posmodvi(dest, GRID_SIZE)
+	
+	# Clear the chunks
 	_delete_chunk_entities(modp)
-	_set_chunk_tilemap(modp, rand_id)
+	_clear_chunk_tilemap(modp)
+	
+	# Set the new chunks
+	var prev_gp = LevelChunk.posmodvi(dest-direction, GRID_SIZE)
+	var new_chunk = _get_level_chunk(_grid_to_index(prev_gp)).next_chunk()	
+	_set_chunk_tilemap(modp, new_chunk)
 	_spawn_chunk_entities(modp)
 
 
-func _set_chunk_tilemap(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gridpos)]) -> void:
+func _clear_chunk_tilemap(gridpos: Vector2i) -> void:
+	# Clear all the old chunk tiles
 	var tilepos = gridpos * LevelChunk.TILEMAP_SIZE + GRID_OFFSET
 	var index = _grid_to_index(gridpos)
-	var old_id = _grid[index]
-	var old_chunk = _level_chunks[old_id]
+	var old_chunk = _get_level_chunk(index)
 	_clear_pattern(tilepos + old_chunk.tilemap_offset, old_chunk.pattern)
 	if GRID_SIZE.x > 1:
 		_clear_pattern(tilepos + old_chunk.tilemap_offset + Vector2i(MAX_TILEMAP_SIZE.x, 0), old_chunk.pattern)
@@ -90,9 +100,13 @@ func _set_chunk_tilemap(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gr
 		_clear_pattern(tilepos + old_chunk.tilemap_offset + MAX_TILEMAP_SIZE, old_chunk.pattern)
 		_clear_pattern(tilepos + old_chunk.tilemap_offset - MAX_TILEMAP_SIZE, old_chunk.pattern)
 
-	_grid[index] = new_id
-	var new_chunk = _get_level_chunk(index)
-	_set_pattern(tilepos + new_chunk.tilemap_offset, new_chunk.pattern)
+
+func _set_chunk_tilemap(gridpos: Vector2i, new_chunk: LevelChunk) -> void:
+	# Set the new chunk tilemap
+	var tilepos = gridpos * LevelChunk.TILEMAP_SIZE + GRID_OFFSET
+	var index = _grid_to_index(gridpos)
+	_grid[index] = new_chunk
+	_set_pattern( tilepos + new_chunk.tilemap_offset, new_chunk.pattern)
 	if GRID_SIZE.x > 1:
 		_set_pattern(tilepos + new_chunk.tilemap_offset + Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
 		_set_pattern(tilepos + new_chunk.tilemap_offset - Vector2i(MAX_TILEMAP_SIZE.x, 0), new_chunk.pattern)
@@ -111,7 +125,7 @@ func _clear_pattern(tile_offset: Vector2i, pattern: TileMapPattern) -> void:
 		foreground.set_cell(c + tile_offset, -1, Vector2i(-1, -1))
 
 
-func _spawn_chunk_entities(gridpos: Vector2i, new_id: int = _grid[_grid_to_index(gridpos)]) -> void:
+func _spawn_chunk_entities(gridpos: Vector2i) -> void:
 	var tilepos = _grid_to_tile(gridpos)
 	var index = _grid_to_index(gridpos)
 	var new_chunk = _get_level_chunk(index)
@@ -165,7 +179,7 @@ func _add_position_wrapper_to_node(n: Node) -> void:
 
 
 func _get_level_chunk(i: int) -> LevelChunk:
-	return _level_chunks[_grid[i]]
+	return _grid[i]
 
 func _world_to_grid(worldpos: Vector2) -> Vector2i:
 	var v = (Vector2i(worldpos) - GRID_OFFSET*LevelChunk.TILE_SIZE) / LevelChunk.WORLD_SIZE
