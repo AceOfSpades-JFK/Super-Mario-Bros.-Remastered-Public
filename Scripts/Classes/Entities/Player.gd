@@ -889,12 +889,15 @@ func wrap_player(boundaries: Rect2) -> void:
 	%CameraHandler.update_camera_barriers()
 	
 	# Physics interpolation (only noticible if you're REEEALLY paying attention)
-	set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
-	set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
-	$Camera.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
-	$Camera.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
-	%CameraHandler.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
-	%CameraHandler.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+	reset_physics_interpolation()
+	$Camera.reset_physics_interpolation()
+	%CameraHandler.reset_physics_interpolation()
+	# set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	# set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+	# $Camera.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	# $Camera.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
+	# %CameraHandler.set_physics_interpolation_mode(Node.PHYSICS_INTERPOLATION_MODE_OFF)
+	# %CameraHandler.set_physics_interpolation_mode.call_deferred(Node.PHYSICS_INTERPOLATION_MODE_INHERIT)
 
 func do_smoke_effect() -> void:
 	for i in 2:
