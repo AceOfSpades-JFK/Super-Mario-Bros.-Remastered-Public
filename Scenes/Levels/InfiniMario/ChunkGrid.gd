@@ -8,7 +8,6 @@ const MAX_TILEMAP_SIZE: Vector2i = LevelChunk.TILEMAP_SIZE * GRID_SIZE
 const MAX_WORLD_SIZE: Vector2i = MAX_TILEMAP_SIZE * LevelChunk.TILE_SIZE
 
 @export var foreground: TileMapLayer
-@export var view_anchor: ChunkGridViewAnchor
 @export var tilemap_offset: Vector2i = Vector2i.ZERO:
 	set(v):
 		tilemap_offset = v
@@ -34,9 +33,9 @@ func _e_update_marker() -> void:
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		_grid.resize(GRID_SIZE.x * GRID_SIZE.y)
-		view_anchor.crossed_chunks.connect(_on_crossed_chunks)
-		view_anchor.looped_horizontal.connect(_on_looped_horizontal)
-		view_anchor.looped_vertical.connect(_on_looped_vertical)
+		
+		# Connect any signals
+		get_tree().node_added.connect(_on_node_entered_tree)
 		
 		# Generate level chunks
 		for c: LevelChunkEntry in get_children():
@@ -57,7 +56,7 @@ func get_chunk_at_index(index: int) -> LevelChunk:
 	return _level_chunks[_grid[index]]
 
 
-func _on_crossed_chunks(gridpos: Vector2i, direction: Vector2i) -> void:
+func update_tilemap(gridpos: Vector2i, direction: Vector2i) -> void:
 	# Handle aspect ratio
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	var aspect: float = viewport_size.x / viewport_size.y
@@ -151,6 +150,17 @@ func _on_looped_horizontal() -> void:
 
 func _on_looped_vertical() -> void:
 	pass
+
+func _on_node_entered_tree(n: Node) -> void:
+	if LevelChunk.ENTITY_GROUPS.any(func(e): return n.is_in_group(e)):
+		if !n.get_children().any(func(c): return c is ChunkGridPositionWrapper):
+			_add_position_wrapper_to_node(n)
+
+
+func _add_position_wrapper_to_node(n: Node) -> void:
+	var poswrap = ChunkGridPositionWrapper.new()
+	poswrap.chunk_grid = self
+	n.add_child(poswrap)
 
 
 func _get_level_chunk(i: int) -> LevelChunk:

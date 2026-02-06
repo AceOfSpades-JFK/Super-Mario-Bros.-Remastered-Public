@@ -44,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="42_ukfdu"]
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="43_elsf2"]
 [ext_resource type="Texture2D" uid="uid://cays8e2m7oj1l" path="res://Assets/Sprites/Tilesets/EdgeConnectionTile.png" id="44_dpuw2"]
+[ext_resource type="Script" uid="uid://cgul2ybbel06t" path="res://Scenes/Levels/InfiniMario/ChunkGridPositionWrapper.gd" id="44_h8vdn"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b6qiv"]
 tile_data = PackedInt32Array(0, 524288, 0, 1, 589824, 0)
@@ -1752,10 +1753,9 @@ default_color = Color(1, 0.28627452, 0.39607844, 1)
 
 [node name="Tiles" parent="." unique_id=561294092 instance=ExtResource("4_ne5xm")]
 
-[node name="ChunkGrid" type="Node" parent="." unique_id=1139029738 node_paths=PackedStringArray("foreground", "view_anchor")]
+[node name="ChunkGrid" type="Node" parent="." unique_id=1139029738 node_paths=PackedStringArray("foreground")]
 script = ExtResource("11_0ftwy")
 foreground = NodePath("../Tiles")
-view_anchor = NodePath("../Player/ChunkGridViewAnchor")
 metadata/_custom_type_script = "uid://cosn72orrjhxs"
 
 [node name="LevelChunkEntry" type="Node" parent="ChunkGrid" unique_id=609722922 node_paths=PackedStringArray("foreground_tilemap")]
@@ -1837,8 +1837,14 @@ plant_direction = 1
 position = Vector2(2, -67)
 auto_death_pit = false
 
-[node name="ChunkGridViewAnchor" type="Node" parent="Player" unique_id=1157278391]
+[node name="ChunkGridPositionWrapper" type="Node" parent="Player" unique_id=1914171591 node_paths=PackedStringArray("chunk_grid")]
+script = ExtResource("44_h8vdn")
+chunk_grid = NodePath("../../ChunkGrid")
+metadata/_custom_type_script = "uid://cgul2ybbel06t"
+
+[node name="ChunkGridViewAnchor" type="Node" parent="Player" unique_id=1459666716 node_paths=PackedStringArray("chunk_grid")]
 script = ExtResource("9_is140")
+chunk_grid = NodePath("../../ChunkGrid")
 metadata/_custom_type_script = "uid://b8cma3girnkbh"
 
 [node name="SpriteMirroringHandler" type="Node" parent="." unique_id=1988229612]

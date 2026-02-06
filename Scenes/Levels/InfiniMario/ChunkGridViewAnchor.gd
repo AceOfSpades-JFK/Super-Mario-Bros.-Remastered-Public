@@ -1,7 +1,6 @@
 extends Node
 class_name ChunkGridViewAnchor
 
-signal crossed_chunks(new_grid: Vector2i)
 signal looped_horizontal
 signal looped_vertical
 
@@ -12,6 +11,8 @@ var _parent: Node2D:
 var position: Vector2:
 	get:
 		return _parent.position
+
+@export var chunk_grid: ChunkGrid
 
 @onready var _prev_position: Vector2 = position
 
@@ -33,18 +34,10 @@ func _physics_process(_delta: float) -> void:
 		print("%s - %s = %s" % [gridpos, prev_gridpos, direction])
 		gridpos.x = posmod(gridpos.x, ChunkGrid.GRID_SIZE.x)
 		gridpos.y = posmod(gridpos.y, ChunkGrid.GRID_SIZE.y)
-		crossed_chunks.emit(gridpos, direction)
-		
-	# Do a modulo thing with the position
-	if Vector2i(position-offset) != modp:
-		if position.x != modx:
-			looped_horizontal.emit()
-		if position.y != mody:
-			looped_vertical.emit()
-			
-		if _parent is Player:
-			_parent.wrap_player(Rect2(offset, size))
-		else:
-			_parent.position = Vector2(modx, mody) + offset
+		_view.call_deferred(gridpos, direction)
 	
 	_prev_position = position
+
+func _view(gridpos, direction) -> void:
+	print("View")
+	chunk_grid.update_tilemap(gridpos, direction)
