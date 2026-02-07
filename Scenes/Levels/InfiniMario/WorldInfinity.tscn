@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="4_ne5xm"]
 [ext_resource type="Script" uid="uid://cjmyu251y7mf7" path="res://Scenes/Levels/InfiniMario/LevelChunkEntry.gd" id="5_ji43w"]
 [ext_resource type="PackedScene" uid="uid://dnx48rakxib6u" path="res://Scenes/Prefabs/Entities/Enemies/Goomba.tscn" id="6_ji43w"]
-[ext_resource type="Script" uid="uid://csu45gtokmidt" path="res://Scenes/Levels/InfiniMario/ChunkSelectorStatic.gd" id="6_xuia4"]
+[ext_resource type="Script" uid="uid://csu45gtokmidt" path="res://Scenes/Levels/InfiniMario/ChunkSelectorUniform.gd" id="6_xuia4"]
 [ext_resource type="PackedScene" uid="uid://cqvr7a6e84oti" path="res://Scenes/Prefabs/Blocks/BrickBlocks/CoinBrickBlock.tscn" id="7_g2aeb"]
 [ext_resource type="PackedScene" uid="uid://bc1mrna4kybhv" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/QuestionBlock.tscn" id="8_fj23m"]
 [ext_resource type="Script" uid="uid://b8cma3girnkbh" path="res://Scenes/Levels/InfiniMario/ChunkGridViewAnchor.gd" id="9_is140"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://clbmg515rgdhs" path="res://Assets/Sprites/Tilesets/Liquids.png" id="40_fqqfs"]
 [ext_resource type="PackedScene" uid="uid://doo8617qiyp77" path="res://Scenes/Prefabs/Entities/Enemies/BuzzyBeetle.tscn" id="41_h8vdn"]
 [ext_resource type="Texture2D" uid="uid://cnexuteg5rvye" path="res://Assets/Sprites/Tilesets/Deco/DecoTemplate.png" id="41_r63yr"]
+[ext_resource type="Script" uid="uid://dvp7jvm4me4bd" path="res://Scenes/Levels/InfiniMario/ChunkSelectorRandom.gd" id="42_4ukp5"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="42_ukfdu"]
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="43_elsf2"]
 [ext_resource type="Texture2D" uid="uid://cays8e2m7oj1l" path="res://Assets/Sprites/Tilesets/EdgeConnectionTile.png" id="44_dpuw2"]
@@ -1754,9 +1755,9 @@ level_chunk_entry = NodePath("../LevelChunkEntry5")
 metadata/_custom_type_script = "uid://csu45gtokmidt"
 
 [sub_resource type="Resource" id="Resource_qd8dq"]
-script = ExtResource("6_xuia4")
-level_chunk_entry = NodePath("../LevelChunkEntry")
-metadata/_custom_type_script = "uid://csu45gtokmidt"
+script = ExtResource("42_4ukp5")
+level_chunk_entries = Array[NodePath]([NodePath("../LevelChunkEntry"), NodePath("../LevelChunkEntry2"), NodePath("../LevelChunkEntry3"), NodePath("../LevelChunkEntry4")])
+metadata/_custom_type_script = "uid://dvp7jvm4me4bd"
 
 [node name="Level" type="Node" unique_id=1788231811]
 script = ExtResource("1_rbqoo")

@@ -44,6 +44,7 @@ func _enter_tree() -> void:
 
 	# Create the Level Chunk
 	var lc: LevelChunk = LevelChunk.new(fg)
+	lc.seed = randi()
 	lc.starting_chunk = starting_chunk
 	lc.tilemap_offset.x = posmod(fg_origin.x, LevelChunk.TILEMAP_SIZE.x)
 	lc.tilemap_offset.y = posmod(fg_origin.y, LevelChunk.TILEMAP_SIZE.y)

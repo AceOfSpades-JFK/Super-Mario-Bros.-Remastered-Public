@@ -50,6 +50,13 @@ var chunk_selector: ChunkSelector
 ## Flag that signifies whether this chunk should be used at the beginning of the level
 var starting_chunk: bool
 
+## Seed used for chunk-specific RNG
+var seed: int:
+	set(v):
+		seed = v
+		_rng.seed = v
+
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _init(p: TileMapPattern) -> void:
 	pattern = p
@@ -65,7 +72,9 @@ func get_used_cells() -> Array[Vector2i]:
 	return pattern.get_used_cells()
 
 func next_chunk() -> LevelChunk:
-	return chunk_selector.next_chunk()
+	return chunk_selector.next_chunk({
+		"seed": _rng.randi()
+	})
 
 
 static func posmodvf(v: Vector2, bounds: Vector2) -> Vector2:

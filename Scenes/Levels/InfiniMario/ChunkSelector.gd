@@ -8,7 +8,7 @@ func initialize(owner: Node) -> void:
     _initialization(owner)
     is_initialized = true
 
-func next_chunk() -> LevelChunk:
+func next_chunk(_params: Dictionary = {}) -> LevelChunk:
     return null
 
 func _initialization(_owner: Node) -> void:
