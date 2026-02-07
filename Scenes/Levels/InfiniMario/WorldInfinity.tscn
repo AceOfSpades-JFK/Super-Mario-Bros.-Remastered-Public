@@ -1754,9 +1754,29 @@ script = ExtResource("6_xuia4")
 level_chunk_entry = NodePath("../LevelChunkEntry5")
 metadata/_custom_type_script = "uid://csu45gtokmidt"
 
+[sub_resource type="Resource" id="Resource_1df8l"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_e3ldx"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry2")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_2dqf1"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry3")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
+[sub_resource type="Resource" id="Resource_k5fi6"]
+script = ExtResource("6_xuia4")
+level_chunk_entry = NodePath("../LevelChunkEntry4")
+metadata/_custom_type_script = "uid://csu45gtokmidt"
+
 [sub_resource type="Resource" id="Resource_qd8dq"]
 script = ExtResource("42_4ukp5")
-level_chunk_entries = Array[NodePath]([NodePath("../LevelChunkEntry"), NodePath("../LevelChunkEntry2"), NodePath("../LevelChunkEntry3"), NodePath("../LevelChunkEntry4")])
+chunk_selectors = Array[ExtResource("6_xuia4")]([SubResource("Resource_1df8l"), SubResource("Resource_e3ldx"), SubResource("Resource_2dqf1"), SubResource("Resource_k5fi6")])
 metadata/_custom_type_script = "uid://dvp7jvm4me4bd"
 
 [node name="Level" type="Node" unique_id=1788231811]

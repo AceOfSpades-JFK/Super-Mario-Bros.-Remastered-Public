@@ -71,10 +71,10 @@ func add_entity(position: Vector2, packed_entity: PackedScene, overrides: Dictio
 func get_used_cells() -> Array[Vector2i]:
 	return pattern.get_used_cells()
 
-func next_chunk() -> LevelChunk:
-	return chunk_selector.next_chunk({
-		"seed": _rng.randi()
-	})
+func next_chunk(_params: Dictionary = {}) -> LevelChunk:
+	if !_params.has("seed"):
+		_params["seed"] = _rng.randi()
+	return chunk_selector.next_chunk(_params)
 
 
 static func posmodvf(v: Vector2, bounds: Vector2) -> Vector2:
