@@ -3,7 +3,7 @@ extends Node
 class_name ChunkGrid
 
 const GRID_OFFSET: Vector2i = Vector2i(-8, -12)	# Compensation for SMBR stuff
-const GRID_SIZE: Vector2i = Vector2i(8, 1)
+const GRID_SIZE: Vector2i = Vector2i(16, 1)
 const MAX_TILEMAP_SIZE: Vector2i = LevelChunk.TILEMAP_SIZE * GRID_SIZE
 const MAX_WORLD_SIZE: Vector2i = MAX_TILEMAP_SIZE * LevelChunk.TILE_SIZE
 
