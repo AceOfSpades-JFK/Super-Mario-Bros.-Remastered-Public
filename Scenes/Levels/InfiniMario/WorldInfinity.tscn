@@ -48,7 +48,6 @@
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="43_elsf2"]
 [ext_resource type="Texture2D" uid="uid://cays8e2m7oj1l" path="res://Assets/Sprites/Tilesets/EdgeConnectionTile.png" id="44_dpuw2"]
 [ext_resource type="Script" uid="uid://cgul2ybbel06t" path="res://Scenes/Levels/InfiniMario/ChunkGridPositionWrapper.gd" id="44_h8vdn"]
-[ext_resource type="PackedScene" uid="uid://cinr6kcbmo6gr" path="res://Scenes/Parts/DropShadowRenderer.tscn" id="48_mmgx0"]
 
 [sub_resource type="Resource" id="Resource_4ukp5"]
 script = ExtResource("6_xuia4")
@@ -1907,6 +1906,5 @@ script = ExtResource("40_3likc")
 node_groups = Array[StringName]([&"Enemies", &"Bowser", &"Coins", &"Lakitus", &"Players"])
 metadata/_custom_type_script = "uid://ceh28krjthgae"
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1017315494]
-
-[node name="DropShadowRenderer" parent="." unique_id=53256479 instance=ExtResource("48_mmgx0")]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1512520539]
+copy_mode = 2

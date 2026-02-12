@@ -17,6 +17,7 @@ var _level_chunks: Array[LevelChunk]
 var _starting_chunks: Array[LevelChunk]
 
 var _grid: Array[LevelChunk] = []	# Holds indices to the level chunks array
+var _ready_chunks: Array[bool] = []
 
 var _e_marker: Marker2D = Marker2D.new()
 
@@ -34,6 +35,7 @@ func _e_update_marker() -> void:
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		_grid.resize(GRID_SIZE.x * GRID_SIZE.y)
+		_ready_chunks.resize(_grid.size())
 		
 		# Connect any signals
 		get_tree().node_added.connect(_on_node_entered_tree)
@@ -45,10 +47,11 @@ func _ready() -> void:
 				_starting_chunks.append(c.level_chunk)
 		
 		# Randomize grid
-		for i in range(0, GRID_SIZE.x):
+		for i in range(0, _grid.size()):
 			var new_chunk: LevelChunk
 			if i == 0:
 				new_chunk = _starting_chunks[randi_range(0, _starting_chunks.size()-1)]
+				_ready_chunks[i] = true
 			else:
 				new_chunk = _get_level_chunk(i-1).next_chunk()
 			
@@ -65,13 +68,18 @@ func get_chunk_at_index(index: int) -> LevelChunk:
 
 
 func update_tilemap(gridpos: Vector2i, direction: Vector2i) -> void:
+	# Set the current chunk's ready to update flag
+	_ready_chunks[_grid_to_index(gridpos)] = true
+
 	# Handle aspect ratio
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	var aspect: float = viewport_size.x / viewport_size.y
-	var draw_dist: int = min(ceili(aspect), GRID_SIZE.x-1)
+	var draw_dist: int = min(ceili(aspect), floori((GRID_SIZE.x-1)/2.0))
 	
 	var dest = (gridpos + (direction*draw_dist))
 	var modp = LevelChunk.posmodvi(dest, GRID_SIZE)
+
+	if !_ready_chunks[_grid_to_index(modp)]: return
 	
 	# Clear the chunks
 	_delete_chunk_entities(modp)
@@ -82,6 +90,9 @@ func update_tilemap(gridpos: Vector2i, direction: Vector2i) -> void:
 	var new_chunk = _get_level_chunk(_grid_to_index(prev_gp)).next_chunk()	
 	_set_chunk_tilemap(modp, new_chunk)
 	_spawn_chunk_entities(modp)
+
+	# Reset the chunk's ready flag
+	_ready_chunks[_grid_to_index(modp)] = false
 
 
 func _clear_chunk_tilemap(gridpos: Vector2i) -> void:
