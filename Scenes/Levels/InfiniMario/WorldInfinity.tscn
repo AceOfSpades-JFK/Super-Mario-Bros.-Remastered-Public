@@ -1907,12 +1907,6 @@ script = ExtResource("40_3likc")
 node_groups = Array[StringName]([&"Enemies", &"Bowser", &"Coins", &"Lakitus", &"Players"])
 metadata/_custom_type_script = "uid://ceh28krjthgae"
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1017315494]
+
 [node name="DropShadowRenderer" parent="." unique_id=53256479 instance=ExtResource("48_mmgx0")]
-
-[node name="SubViewportContainer" parent="DropShadowRenderer" index="0" unique_id=1658230924]
-visible = false
-
-[node name="SubViewport" parent="DropShadowRenderer/SubViewportContainer" index="0" unique_id=1175276237]
-render_target_update_mode = 0
-
-[editable path="DropShadowRenderer"]
